@@ -15,10 +15,10 @@ class Generator
       @param = Parameters.new
    end
 
-   def taskTypeNum nums
+   def taskTypeNum num
       # Here we generate numerosity of the taskset so we can create
       # different tasksets with different charateristics
-      case nums
+      case num
       when "1"
          a = rand @param.short_num_task_range_1
          b = rand @param.mid_num_task_range_1
