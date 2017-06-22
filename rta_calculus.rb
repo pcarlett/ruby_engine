@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-class rta_calculus
+class RTA_Calculus
    def computeRTAforFPS_withBlock
       # Method that compute the feasibility for a taskset under
       # FPS policy with Rate Monotonic method. It computes the same

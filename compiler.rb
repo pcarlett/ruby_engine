@@ -1,6 +1,19 @@
 #!/usr/bin/env ruby
 
-class compiler
+require 'open3'
+
+class Compiler
+
+   def cleanAll
+      Open3.popen3("make clean -C ../ravenscar-edf") do |stdin, stdout, stderr, thread|
+         thread.value
+         puts "EDF Libraries Cleaning Complete."
+      end
+      Open3.popen3("make clean -C ../prio-ravenscar") do |stdin, stdout, stderr, thread|
+         thread.value
+         puts "FPS Libraries Cleaning Complete."
+      end
+   end
 
    def compileLibs
       Open3.popen3("make libs -C ../ravenscar-edf") do |stdin, stdout, stderr, thread|

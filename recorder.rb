@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-def recorder
+def Recorder
    def dataRegistration_short (edf_execs, edf_deads, edf_preem, fps_execs,
                      fps_deads, fps_preem)
 

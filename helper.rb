@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-class helper
+class Helper
 
    def printHelp
       puts "Please use labels as explained:"
