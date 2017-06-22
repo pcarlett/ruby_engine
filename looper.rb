@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative 'Compiler'
+
 class Looper
 
    def testSets loops, mode, type, nums
@@ -134,43 +136,6 @@ class Looper
       end
    end
 
-   def looperForRemoteTests loops, mode, type, nums
-      i=1;
-      puts "0) Cleaning Environment."
-      cleanAll
-      puts "0) Compiling Libraries."
-      compileLibs
-      puts "\n"
-      loops.times do
-         timeStamp, totalTasks, short, mid, long, feasibilityEDF,
-         maxLoadEDF, feasibilityFPS = generateDataset mode, type, nums
-         puts "#{i}/#{loops}) Dataset Generated. Total: #{totalTasks}."
-         puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
-         datasetReplacement timeStamp
-         puts "#{i}/#{loops}) Dataset Replaced."
-         compileUnits
-         puts "#{i}/#{loops}) Units Compiled."
-         puts "#{i}/#{loops}) Uploading Unit01 to Remote Server."
-         uploadExecsToRemote
-         puts "#{i}/#{loops}) Registering Data: EDF Feasibility: #{feasibilityEDF.to_s.upcase} "\
-         "with: #{maxLoadEDF} %."
-         edf_execs, edf_deads, edf_preem = execEDFTestRemote
-         puts "#{i}/#{loops}) Testing Registered Data..."
-         puts "#{i}/#{loops}) EDF Test Completed."
-         puts "#{i}/#{loops}) Execs: #{edf_execs}\t Deads: #{edf_deads}\t Preemps: #{edf_preem}"
-         puts "#{i}/#{loops}) Registering Data: FPS Feasibility: #{feasibilityFPS.to_s.upcase}."
-         fps_execs, fps_deads, fps_preem = execFPSTestRemote
-         puts "#{i}/#{loops}) FPS Test Completed."
-         puts "#{i}/#{loops}) Execs: #{fps_execs}\t Deads: #{fps_deads}\t Preemps: #{fps_preem}"
-         dataRegistration timeStamp, mode, totalTasks, short, mid, long,
-         feasibilityEDF, maxLoadEDF, feasibilityFPS, edf_execs, edf_deads,
-         edf_preem, hash_edf, fps_execs, fps_deads, fps_preem, hash_fps
-         puts "#{i}/#{loops}) Data Registered Correctly."
-         puts "\n"
-         i +=1
-      end
-   end
-
    def cleaner (argument)
       timeStamp = ((Time.now).strftime("%Y-%m-%d %H:%M:%S.%6L")).gsub! " ", "_"
       Open3.popen3("mv ../results.csv history_data/#{timeStamp}_#{argument}.csv") do |stdin, stdout, stderr, thread|
@@ -199,4 +164,6 @@ class Looper
          thread.value
       end
       puts "Programs Duplicated."
+   end
+
 end

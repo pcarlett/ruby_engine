@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-class parameters_limited
+class Parameters_Limited
 
    attr_accessor :short_period_range
    attr_accessor :mid_period_range

@@ -4,12 +4,11 @@ class Helper
 
    def printHelp
       puts "Please use labels as explained:"
-      puts "-l xxx -m zzz -exp kkk yyy: test locally"
-      puts "-d xxx -m zzz -exp kkk yyy: test dfp locally with a single protected object"
+      puts "-l xxx -m zzz -e kkk -t yyy: test locally"
+      puts "-d xxx -m zzz -e kkk -t yyy: test dfp locally with a single protected object"
       puts "-exec: compile and registrer results for a specific test"
-      puts "-r xxx -m zzz -exp kkk yyy: test remotely"
-      puts "-t xxx -m zzz -exp kkk yyy: peforms a static test without execute it on the simulator"
-      puts "-tb xxx -m zzz -exp kkk yyy: test environment with block."
+      puts "-t xxx -m zzz -e kkk -t yyy: peforms a static test without execute it on the simulator"
+      puts "-tb xxx -m zzz -e kkk -t yyy: test environment with block."
       puts "-a bbb: to clean of the stored results and archive with argument bbb."
       puts "-c to duplicate main Ruby programs in the other workspaces."
       puts ""

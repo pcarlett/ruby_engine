@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative 'helper'
-
-require_relative 'simulator'
-require_relative 'recorder'
+require_relative 'Helper'
+require_relative 'Looper'
 
 #####################################################################
 ##
@@ -12,25 +10,26 @@ require_relative 'recorder'
 #####################################################################
 
 help = Helper.new
+looper = Looper.new
 
-if ARGV[1].nil? || ARGV[3].nil? || ARGV[5].nil? || ARGV[6].nil? then
-   help.printHelp
+case ARGV[0]
+when "-a"
+   looper.cleaner ARGV[1].to_s
+when "-c"
+   looper.cloneIstances
 else
-   case ARGV[0]
+   if ARGV[1].nil? || ARGV[3].nil? || ARGV[5].nil? || ARGV[7].nil? then
+      help.printHelp
+   else
+      case ARGV[0]
       when "-l"
-            engine.looperForLocalTests ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[6].to_s
+            looper.looperForLocalTests ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
       when "-d"
-            engine.looperForLocalTests_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[6].to_s
-      when "-r"
-            engine.looperForRemoteTests ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[6].to_s
+            looper.looperForLocalTests_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
       when "-t"
-            engine.testSets ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[6].to_s
+            looper.testSets ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
       when "-tb"
-            engine.testSets_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[6].to_s
-      when "-a"
-         engine.cleaner ARGV[1].to_s
-      when "-c"
-         engine.cloneIstances
+            looper.testSets_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
       else
          help.printHelp
       end
