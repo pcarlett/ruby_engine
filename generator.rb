@@ -12,7 +12,7 @@ class Generator
 
    def initialize
       @taskset = Array.new
-      @param = Parameters.new
+      @param = Parameters_Extended.new
    end
 
    def taskTypeNum num
@@ -280,38 +280,6 @@ class Generator
       @taskset.push t3
       @taskset.push t4
       @taskset.push t5
-   end
-
-   def setPriorityLevelsRateMonotonic
-      i=1;
-      @taskset.sort_by! {|t| t.period}.reverse!
-      @taskset.each_cons(2).map do |t,n|
-         t.prio = i
-         if taskset.last == n then
-            if t.period == n.period then
-               n.prio = i
-            else
-               n.prio = i + 1
-            end
-         end
-         if t.period == n.period then i else (i += 1) end
-      end
-   end
-
-   def setPriorityLevelsDeadlineMonotonic
-      i=1;
-      @taskset.sort_by! {|t| t.dead}.reverse!
-      @taskset.each_cons(2).map do |t,n|
-         t.prio = i
-         if @taskset.last == n then
-            if t.dead == n.dead then
-               n.prio = i
-            else
-               n.prio = i + 1
-            end
-         end
-         if t.dead == n.dead then i else (i += 1) end
-      end
    end
 
    def printDataFile

@@ -1,6 +1,39 @@
 #!/usr/bin/env ruby
 
 class RTA_Calculus
+
+   def setPriorityLevelsRateMonotonic
+      i=1;
+      @taskset.sort_by! {|t| t.period}.reverse!
+      @taskset.each_cons(2).map do |t,n|
+         t.prio = i
+         if taskset.last == n then
+            if t.period == n.period then
+               n.prio = i
+            else
+               n.prio = i + 1
+            end
+         end
+         if t.period == n.period then i else (i += 1) end
+      end
+   end
+
+   def setPriorityLevelsDeadlineMonotonic
+      i=1;
+      @taskset.sort_by! {|t| t.dead}.reverse!
+      @taskset.each_cons(2).map do |t,n|
+         t.prio = i
+         if @taskset.last == n then
+            if t.dead == n.dead then
+               n.prio = i
+            else
+               n.prio = i + 1
+            end
+         end
+         if t.dead == n.dead then i else (i += 1) end
+      end
+   end
+
    def computeRTAforFPS_withBlock
       # Method that compute the feasibility for a taskset under
       # FPS policy with Rate Monotonic method. It computes the same
