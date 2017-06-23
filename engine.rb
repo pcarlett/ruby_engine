@@ -24,7 +24,7 @@ else
       case ARGV[0]
       when "-l"
             looper.looperForLocalTests ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
-      when "-d"
+      when "-lb"
             looper.looperForLocalTests_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
       when "-t"
             looper.testSets ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
