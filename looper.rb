@@ -2,6 +2,8 @@
 
 require_relative 'compiler'
 require_relative 'generator'
+require_relative 'simulator'
+require_relative 'recorder'
 
 class Looper
 
@@ -64,20 +66,22 @@ class Looper
          puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
          generator.datasetReplacement timeStamp
          puts "#{i}/#{loops}) Dataset Replaced."
-         @compiler.compileUnit unit01
+         compiler.compileUnit "unit01"
          puts "#{i}/#{loops}) Units Compiled."
          puts "#{i}/#{loops}) Registering Data: EDF Feasibility: #{feasibilityEDF.to_s.upcase} "\
          "with: #{maxLoadEDF} %."
+         simulator = Simulator.new
          edf_execs, edf_deads, edf_preem, hash_edf_dead, hash_edf_map, hash_edf_exec =
-            execGlobalTestLocal "tsim-leon ../ravenscar-edf/unit01"
+            simulator.execGlobalTestLocal "tsim-leon ../ravenscar-edf/unit01"
          puts "#{i}/#{loops}) EDF Test Completed."
          puts "#{i}/#{loops}) Execs: #{edf_execs}\t Deads: #{edf_deads}\t Preemps: #{edf_preem}"
          puts "#{i}/#{loops}) Registering Data: FPS Feasibility: #{feasibilityFPS.to_s.upcase}."
          fps_execs, fps_deads, fps_preem, hash_fps_dead, hash_fps_map, hash_fps_exec =
-            execGlobalTestLocal "tsim-leon ../prio-ravenscar/unit01"
+            simulator.execGlobalTestLocal "tsim-leon ../prio-ravenscar/unit01"
          puts "#{i}/#{loops}) FPS Test Completed."
          puts "#{i}/#{loops}) Execs: #{fps_execs}\t Deads: #{fps_deads}\t Preemps: #{fps_preem}"
-         dataRegistration timeStamp, mode, totalTasks, short, mid, long,
+         recorder = Recorder.new
+         recorder.dataRegistration timeStamp, mode, totalTasks, short, mid, long,
             feasibilityEDF, maxLoadEDF, feasibilityFPS, edf_execs, edf_deads,
             edf_preem, fps_execs, fps_deads, fps_preem, hash_edf_dead, hash_edf_map,
             hash_edf_exec, hash_fps_dead, hash_fps_map, hash_fps_exec
