@@ -2,6 +2,10 @@
 
 class RTA_Calculus
 
+   def initialize taskset
+      @taskset = taskset
+   end
+
    def setPriorityLevelsRateMonotonic
       i=1;
       @taskset.sort_by! {|t| t.period}.reverse!
@@ -55,7 +59,8 @@ class RTA_Calculus
             @taskset.each do |tt|
                break if tt == t
                parts += (w / tt.period.to_f).ceil *
-                        (tt.exec + tt.FPS_CS)
+                        (tt.exec + tt.FPS_CS1 + tt.FPS_CS2)
+                        # (tt.exec + tt.FPS_CS)
             end
             w_next = t.exec + parts
             # puts w_next
@@ -97,7 +102,7 @@ class RTA_Calculus
       @taskset.each do |taskForDead|
          maxH = 0.to_f
          @taskset.each do |task|
-            comp = task.EDF_CS + task.exec # used in original computation
+            comp = task.EDF_CS1 + task.exec + task.EDF_CS2 # used in original computation
             # comp = task.exec # used for test in forcedTasksets
             val = [0, (((taskForDead.dead - task.dead) / task.period).floor) * comp + comp].max
             maxH = maxH + val
@@ -113,7 +118,7 @@ class RTA_Calculus
             if t == 0 then t = 1 end
             maxH = 0.to_f
             @taskset.each do |task|
-               comp = task.EDF_CS + task.exec # used in original computation
+               comp = task.EDF_CS1 + task.exec + task.EDF_CS2 # used in original computation
                # comp = task.exec # used for test in forcedTasksets
                val = [0, (((t - task.dead) / task.period).floor) * comp + comp].max
                maxH = maxH + val

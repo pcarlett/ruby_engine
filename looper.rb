@@ -1,63 +1,70 @@
 #!/usr/bin/env ruby
 
-require_relative 'Compiler'
+require_relative 'compiler'
+require_relative 'generator'
 
 class Looper
 
-   def testSets loops, mode, type, nums
+   # def initialize
+   #    @compiler = Compiler.new
+   # end
+
+   def testSets_withBlock loops, mode
       i=1;
       puts "\n"
       loops.times do
          timeStamp, totalTasks, short, mid, long, feasibilityEDF,
-         maxLoadEDF, feasibilityFPS = generateDataset mode, type, nums
+         maxLoadEDF, feasibilityFPS = generateDataset_withBlock mode
+         puts "#{i}/#{loops}) Dataset Generated. Total: #{totalTasks}."
+         puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
+         puts "#{i}/#{loops}) Testing EDF Dataset: EDF Feasibility: "\
+              "#{feasibilityEDF.to_s.upcase} with: #{maxLoadEDF} %."
+         puts "#{i}/#{loops}) Testing FPS Dataset: FPS Feasibility: "\
+              "#{feasibilityFPS.to_s.upcase}."
+         puts "#{i}/#{loops}) Test Ended Correctly."
+         puts "\n"
+         i +=1
+      end
+   end
+
+   def testSets loops, mode, type
+      i=1;
+      puts "\n"
+      loops.times do
+         timeStamp, totalTasks, short, mid, long, feasibilityEDF,
+         maxLoadEDF, feasibilityFPS = generateDataset mode, type
          puts "#{i}/#{loops}) Dataset Generated. Total: #{totalTasks}."
          puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
          datasetReplacement timeStamp
          puts "#{i}/#{loops}) Dataset Replaced."
          puts "#{i}/#{loops}) Testing EDF Dataset: EDF Feasibility: "\
-              "#{feasibilityEDF.to_s.upcase} with: #{maxLoadEDF} %."
+         "#{feasibilityEDF.to_s.upcase} with: #{maxLoadEDF} %."
          puts "#{i}/#{loops}) Testing FPS Dataset: FPS Feasibility: "\
-              "#{feasibilityFPS.to_s.upcase}."
+         "#{feasibilityFPS.to_s.upcase}."
          puts "#{i}/#{loops}) Test Ended Correctly."
          puts "\n"
          i +=1
       end
    end
 
-   def testSets_withBlock loops, mode, type, nums
+   #### DEBUGGED
+   def looperForLocalTests loops, mode, type
       i=1;
-      puts "\n"
-      loops.times do
-         timeStamp, totalTasks, short, mid, long, feasibilityEDF,
-         maxLoadEDF, feasibilityFPS = generateDataset_withBlock mode, type, nums
-         puts "#{i}/#{loops}) Dataset Generated. Total: #{totalTasks}."
-         puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
-         puts "#{i}/#{loops}) Testing EDF Dataset: EDF Feasibility: "\
-              "#{feasibilityEDF.to_s.upcase} with: #{maxLoadEDF} %."
-         puts "#{i}/#{loops}) Testing FPS Dataset: FPS Feasibility: "\
-              "#{feasibilityFPS.to_s.upcase}."
-         puts "#{i}/#{loops}) Test Ended Correctly."
-         puts "\n"
-         i +=1
-      end
-   end
-
-
-   def looperForLocalTests loops, mode, type, nums
-      i=1;
+      compiler = Compiler.new
       puts "0) Cleaning Environment."
-      cleanAll
+      compiler.cleanAll
       puts "0) Compiling Libraries."
-      compileLibs
+      compiler.compileLibs
       puts "\n"
       loops.times do
+         generator = Generator.new
          timeStamp, totalTasks, short, mid, long, feasibilityEDF,
-         maxLoadEDF, feasibilityFPS = generateDataset mode, type, nums
+         maxLoadEDF, feasibilityFPS = generator.generateDataset mode, type
          puts "#{i}/#{loops}) Dataset Generated. Total: #{totalTasks}."
          puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
-         datasetReplacement timeStamp
+         generator.datasetReplacement timeStamp
          puts "#{i}/#{loops}) Dataset Replaced."
-         compileUnit01
+         @compiler.compileUnit unit01
          puts "#{i}/#{loops}) Units Compiled."
          puts "#{i}/#{loops}) Registering Data: EDF Feasibility: #{feasibilityEDF.to_s.upcase} "\
          "with: #{maxLoadEDF} %."
@@ -100,7 +107,7 @@ class Looper
       puts "\n"
    end
 
-   def looperForLocalTests_withBlock loops, mode, type, nums
+   def looperForLocalTests_withBlock loops, mode, type
       i=1;
       puts "0) Cleaning Environment."
       cleanAll
@@ -109,7 +116,7 @@ class Looper
       puts "\n"
       loops.times do
          timeStamp, totalTasks, short, mid, long, feasibilityEDF,
-         maxLoadEDF, feasibilityFPS, maxPrio, minDead = generateDataset_withBlock mode, type, nums
+         maxLoadEDF, feasibilityFPS, maxPrio, minDead = generateDataset_withBlock mode, type
          puts "#{i}/#{loops}) Dataset Generated. Total: #{totalTasks}."
          puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
          datasetReplacement_withBlock timeStamp, maxPrio, minDead
@@ -141,26 +148,26 @@ class Looper
       Open3.popen3("mv ../results.csv history_data/#{timeStamp}_#{argument}.csv") do |stdin, stdout, stderr, thread|
          thread.value
       end
-      Open3.popen3("cat ../../workspace2/results.csv >> ../../workspace/autoruby/history_data/#{timeStamp}_#{argument}.csv; rm ../../workspace2/results.csv") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cat ../../workspace2/results.csv >> ../../workspace/ruby_engine/history_data/#{timeStamp}_#{argument}.csv; rm ../../workspace2/results.csv") do |stdin, stdout, stderr, thread|
          thread.value
       end
-      Open3.popen3("cat ../../workspace3/results.csv >> ../../workspace/autoruby/history_data/#{timeStamp}_#{argument}.csv; rm ../../workspace3/results.csv") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cat ../../workspace3/results.csv >> ../../workspace/ruby_engine/history_data/#{timeStamp}_#{argument}.csv; rm ../../workspace3/results.csv") do |stdin, stdout, stderr, thread|
          thread.value
       end
-      Open3.popen3("cat ../../workspace4/results.csv >> ../../workspace/autoruby/history_data/#{timeStamp}_#{argument}.csv; rm ../../workspace4/results.csv") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cat ../../workspace4/results.csv >> ../../workspace/ruby_engine/history_data/#{timeStamp}_#{argument}.csv; rm ../../workspace4/results.csv") do |stdin, stdout, stderr, thread|
          thread.value
       end
       puts "Backup Done. Cleaning Operations Terminated."
    end
 
    def cloneIstances
-      Open3.popen3("cp *.rb ../../workspace2/autoruby/") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cp *.rb ../../workspace2/ruby_engine/") do |stdin, stdout, stderr, thread|
          thread.value
       end
-      Open3.popen3("cp *.rb ../../workspace3/autoruby/") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cp *.rb ../../workspace3/ruby_engine/") do |stdin, stdout, stderr, thread|
          thread.value
       end
-      Open3.popen3("cp *.rb ../../workspace4/autoruby/") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cp *.rb ../../workspace4/ruby_engine/") do |stdin, stdout, stderr, thread|
          thread.value
       end
       puts "Programs Duplicated."

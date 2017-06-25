@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative 'Helper'
-require_relative 'Looper'
+require_relative 'helper'
+require_relative 'looper'
 
 #####################################################################
 ##
@@ -18,18 +18,18 @@ when "-a"
 when "-c"
    looper.cloneIstances
 else
-   if ARGV[1].nil? || ARGV[3].nil? || ARGV[5].nil? || ARGV[7].nil? then
+   if ARGV[1].nil? || ARGV[3].nil? || ARGV[5].nil? then
       help.printHelp
    else
       case ARGV[0]
       when "-l"
-            looper.looperForLocalTests ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
+            looper.looperForLocalTests ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s
       when "-lb"
-            looper.looperForLocalTests_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
+            looper.looperForLocalTests_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s
       when "-t"
-            looper.testSets ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
+            looper.testSets ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s
       when "-tb"
-            looper.testSets_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s, ARGV[7].to_s
+            looper.testSets_withBlock ARGV[1].to_i, ARGV[3].to_s, ARGV[5].to_s
       else
          help.printHelp
       end

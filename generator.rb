@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative 'basic_task'
+require_relative 'basictask'
 require_relative 'parameters_extended'
+require_relative 'rta_calculus'
 # require_relative 'parameters_limited'
 
 class Generator
@@ -15,10 +16,103 @@ class Generator
       @param = Parameters_Extended.new
    end
 
-   def taskTypeNum num
+   def generateDataset_withBlock mode, type, nums
+      # Generates the new Dataset and return set summary data.
+      # It writes the basic data_struct01.ads in the main directory
+      timeStamp = Time.now
+      num_of_short, num_of_mid, num_of_long = taskTypeNum nums
+      case mode
+      when "i" # implicit
+         generateImplicitTaskset num_of_short, num_of_mid, num_of_long, type
+      when "c" # constrained
+         generateConstrainedTaskset num_of_short, num_of_mid, num_of_long, type
+      when "a" # arbitrary
+         generateArbitraryTaskset num_of_short, num_of_mid, num_of_long, type
+      when "m" # mixed
+         # if none of them is specified, we generate a mixed deadlines taskset
+         shortImp = rand 1..(num_of_short - 1)
+         shortImp = 0 if shortImp.nil?
+         shortCon = rand 1..(num_of_short - shortImp - 1).to_i
+         shortCon = 0 if shortCon.nil?
+         shortArb = num_of_short - shortImp - shortCon
+         shortArb = 0 if shortArb.nil?
+         midImp = rand 1..(num_of_mid - 1).to_i
+         midImp = 0 if midImp.nil?
+         midCon = rand 1..(num_of_mid - midImp - 1).to_i
+         midCon = 0 if midCon.nil?
+         midArb = num_of_mid - midImp - midCon
+         midArb = 0 if midArb.nil?
+         longImp = rand 1..(num_of_long - 1).to_i
+         longImp = 0 if longImp.nil?
+         longCon = rand 1..(num_of_long - longImp - 1).to_i
+         longCon = 0 if longCon.nil?
+         longArb = num_of_long - longImp - longCon
+         longArb = 0 if longArb.nil?
+         generateImplicitTaskset shortImp, midImp, longImp, type
+         generateConstrainedTaskset shortCon, midCon, longCon, type
+         generateArbitraryTaskset shortArb, midArb, longArb, type
+      else
+         raise 'Error size in generateDataset'
+      end
+      rta_calculus = RTA_Calculus.new @taskset
+      feasibilityEDF, maxLoadEDF = rta_calculus.computeRTAforEDF_withBlock
+      feasibilityFPS = rta_calculus.computeRTAforFPS_withBlock
+      printDataFile_withBlock
+      totalTasks = num_of_short + num_of_mid + num_of_long
+      maxPrio, minDead = Extact_MaxPrio_MinDead
+      return timeStamp, totalTasks, num_of_short, num_of_mid, num_of_long, feasibilityEDF, maxLoadEDF, feasibilityFPS, maxPrio, minDead
+   end
+
+   def generateDataset mode, type
+      # Generates the new Dataset and return set summary data.
+      # It writes the basic data_struct01.ads in the main directory
+      timeStamp = Time.now
+      num_of_short, num_of_mid, num_of_long = taskTypeNum type
+      case mode
+      when "i" # implicit
+         generateImplicitTaskset num_of_short, num_of_mid, num_of_long, type
+      when "c" # constrained
+         generateConstrainedTaskset num_of_short, num_of_mid, num_of_long, type
+      when "a" # arbitrary
+         generateArbitraryTaskset num_of_short, num_of_mid, num_of_long, type
+      when "m" # mixed
+         # if none of them is specified, we generate a mixed deadlines taskset
+         shortImp = rand 1..(num_of_short - 1)
+         shortImp = 0 if shortImp.nil?
+         shortCon = rand 1..(num_of_short - shortImp - 1).to_i
+         shortCon = 0 if shortCon.nil?
+         shortArb = num_of_short - shortImp - shortCon
+         shortArb = 0 if shortArb.nil?
+         midImp = rand 1..(num_of_mid - 1).to_i
+         midImp = 0 if midImp.nil?
+         midCon = rand 1..(num_of_mid - midImp - 1).to_i
+         midCon = 0 if midCon.nil?
+         midArb = num_of_mid - midImp - midCon
+         midArb = 0 if midArb.nil?
+         longImp = rand 1..(num_of_long - 1).to_i
+         longImp = 0 if longImp.nil?
+         longCon = rand 1..(num_of_long - longImp - 1).to_i
+         longCon = 0 if longCon.nil?
+         longArb = num_of_long - longImp - longCon
+         longArb = 0 if longArb.nil?
+         generateImplicitTaskset shortImp, midImp, longImp, type
+         generateConstrainedTaskset shortCon, midCon, longCon, type
+         generateArbitraryTaskset shortArb, midArb, longArb, type
+      else
+         raise 'Error size in generateDataset'
+      end
+      rta_calculus = RTA_Calculus.new @taskset
+      feasibilityEDF, maxLoadEDF = rta_calculus.computeRTAforEDF_withBlock
+      feasibilityFPS = rta_calculus.computeRTAforFPS
+      printDataFile
+      totalTasks = num_of_short + num_of_mid + num_of_long
+      return timeStamp, totalTasks, num_of_short, num_of_mid, num_of_long, feasibilityEDF, maxLoadEDF, feasibilityFPS
+   end
+
+   def taskTypeNum type
       # Here we generate numerosity of the taskset so we can create
       # different tasksets with different charateristics
-      case num
+      case type
       when "1"
          a = rand @param.short_num_task_range_1
          b = rand @param.mid_num_task_range_1
@@ -53,153 +147,75 @@ class Generator
       return a, b, c
    end
 
-   def generateSingleTask (size, mode, type)
+   def generateSingleTask (size, mode)
       # Generates the task modality
-      case type
-      when "std"
-         case mode
-         when "implicit"
-            case size
-            when "short"
-               p = rand @param.short_period_range
-               e = rand @param.short_impl_exec_range
-            when "mid"
-               p = rand @param.mid_period_range
-               e = rand @param.mid_impl_exec_range
-            when "long"
-               p = rand @param.long_period_range
-               e = rand @param.long_impl_exec_range
-            else
-               raise 'Error size in generateSingleTask'
-            end
-            d = p
-         when "arbitrary"
-            case size
-            when "short"
-               p = rand @param.short_period_range
-               e = rand @param.short_arbit_exec_range
-               begin
-                  d = rand @param.short_arbit_dead_range
-               end while d <= p
-            when "mid"
-               p = rand @param.mid_period_range
-               e = rand @param.mid_arbit_exec_range
-               begin
-                  d = rand @param.mid_arbit_dead_range
-               end while d <= p
-            when "long"
-               p = rand @param.long_period_range
-               e = rand @param.long_arbit_exec_range
-               begin
-                  d = rand @param.long_arbit_dead_range
-               end while d <= p
-            else
-               raise 'Error size in generateSingleTask'
-            end
-         when "constrained"
-            case size
-            when "short"
-               p = rand @param.short_period_range
-               e = rand @param.short_constr_exec_range
-               begin
-                  d = rand @param.short_constr_dead_range
-               end while d >= p
-            when "mid"
-               p = rand @param.mid_period_range
-               e = rand @param.mid_constr_exec_range
-               begin
-                  d = rand @param.mid_constr_dead_range
-               end while d >= p
-            when "long"
-               p = rand @param.long_period_range
-               e = rand @param.long_constr_exec_range
-               begin
-                  d = rand @param.long_constr_dead_range
-               end while d >= p
-            else
-               raise 'Error size in generateSingleTask'
-            end
+      case mode
+      when "implicit"
+         case size
+         when "short"
+            p = rand @param.short_period_range
+            e = rand @param.short_impl_exec_range
+         when "mid"
+            p = rand @param.mid_period_range
+            e = rand @param.mid_impl_exec_range
+         when "long"
+            p = rand @param.long_period_range
+            e = rand @param.long_impl_exec_range
          else
             raise 'Error size in generateSingleTask'
          end
-
-         t = BasicTask.new 0, 2 ** d, 2 ** p, 0, e
-
-      when "mix"
-         case mode
-         when "implicit"
-            case size
-            when "short"
-               p = rand @param.short_period_demo_mixed
-               e = rand @param.short_impl_exec_range
-            when "mid"
-               p = rand @param.mid_period_demo_mixed
-               e = rand @param.mid_impl_exec_range
-            when "long"
-               p = rand @param.long_period_demo_mixed
-               e = rand @param.long_impl_exec_range
-            else
-               raise 'Error size in generateSingleTask'
-            end
-            d = p
-         when "arbitrary"
-            case size
-            when "short"
-               p = rand @param.short_period_demo_mixed
-               e = rand @param.short_arbit_exec_range
-               begin
-                  d = rand @param.short_arbit_dead_demo_mixed
-               end while d <= p
-            when "mid"
-               p = rand @param.mid_period_demo_mixed
-               e = rand @param.mid_arbit_exec_range
-               begin
-                  d = rand @param.mid_arbit_dead_demo_mixed
-               end while d <= p
-            when "long"
-               p = rand @param.long_period_demo_mixed
-               e = rand @param.long_arbit_exec_range
-               begin
-                  d = rand @param.long_arbit_dead_demo_mixed
-               end while d <= p
-            else
-               raise 'Error size in generateSingleTask'
-            end
-         when "constrained"
-            case size
-            when "short"
-               p = rand @param.short_period_demo_mixed
-               e = rand @param.short_constr_exec_range
-               begin
-                  d = rand @param.short_constr_dead_demo_mixed
-               end while d >= p
-            when "mid"
-               p = rand @param.mid_period_demo_mixed
-               e = rand @param.mid_constr_exec_range
-               begin
-                  d = rand @param.mid_constr_dead_demo_mixed
-               end while d >= p
-            when "long"
-               p = rand @param.long_period_demo_mixed
-               e = rand @param.long_constr_exec_range
-               begin
-                  d = rand @param.long_constr_dead_demo_mixed
-               end while d >= p
-            else
-               raise 'Error size in generateSingleTask'
-            end
+         d = p
+      when "arbitrary"
+         case size
+         when "short"
+            p = rand @param.short_period_range
+            e = rand @param.short_arbit_exec_range
+            begin
+               d = rand @param.short_arbit_dead_range
+            end while d <= p
+         when "mid"
+            p = rand @param.mid_period_range
+            e = rand @param.mid_arbit_exec_range
+            begin
+               d = rand @param.mid_arbit_dead_range
+            end while d <= p
+         when "long"
+            p = rand @param.long_period_range
+            e = rand @param.long_arbit_exec_range
+            begin
+               d = rand @param.long_arbit_dead_range
+            end while d <= p
          else
             raise 'Error size in generateSingleTask'
          end
-
-         dead = expSolver (d)
-         period = expSolver (p)
-         t = BasicTask.new 0, dead, period, 0, e
-
+      when "constrained"
+         case size
+         when "short"
+            p = rand @param.short_period_range
+            e = rand @param.short_constr_exec_range
+            begin
+               d = rand @param.short_constr_dead_range
+            end while d >= p
+         when "mid"
+            p = rand @param.mid_period_range
+            e = rand @param.mid_constr_exec_range
+            begin
+               d = rand @param.mid_constr_dead_range
+            end while d >= p
+         when "long"
+            p = rand @param.long_period_range
+            e = rand @param.long_constr_exec_range
+            begin
+               d = rand @param.long_constr_dead_range
+            end while d >= p
+         else
+            raise 'Error size in generateSingleTask'
+         end
       else
          raise 'Error size in generateSingleTask'
       end
-      @taskset.push t
+
+      @taskset.push BasicTask.new 0, 2 ** d, 2 ** p, 0, e
       # puts "Prio: #{t.prio}\t Dead: #{t.dead}\t Period: #{t.period}\t Exec: #{t.exec}"
    end
 
@@ -219,37 +235,37 @@ class Generator
 
    def generateImplicitTaskset (short, mid, long, type)
       for i in 0..short
-         generateSingleTask "short", "implicit", type
+         generateSingleTask "short", "implicit"
       end
       for i in 0..mid
-         generateSingleTask "mid", "implicit", type
+         generateSingleTask "mid", "implicit"
       end
       for i in 0..long
-         generateSingleTask "long", "implicit", type
+         generateSingleTask "long", "implicit"
       end
    end
 
    def generateConstrainedTaskset (short, mid, long, type)
       for i in 0..short
-         generateSingleTask "short", "constrained", type
+         generateSingleTask "short", "constrained"
       end
       for i in 0..mid
-         generateSingleTask "mid", "constrained", type
+         generateSingleTask "mid", "constrained"
       end
       for i in 0..long
-         generateSingleTask "long", "constrained", type
+         generateSingleTask "long", "constrained"
       end
    end
 
    def generateArbitraryTaskset (short, mid, long, type)
       for i in 0..short
-         generateSingleTask "short", "arbitrary", type
+         generateSingleTask "short", "arbitrary"
       end
       for i in 0..mid
-         generateSingleTask "mid", "arbitrary", type
+         generateSingleTask "mid", "arbitrary"
       end
       for i in 0..long
-         generateSingleTask "long", "arbitrary", type
+         generateSingleTask "long", "arbitrary"
       end
    end
 
@@ -280,6 +296,56 @@ class Generator
       @taskset.push t3
       @taskset.push t4
       @taskset.push t5
+   end
+
+   def datasetReplacement (timeStamp)
+      # This procedure replace the old data_struct01.ads file and puts it
+      # in a specific directory
+      timeStampStr = timeStamp.strftime("%Y-%m-%d %H:%M:%S.%6L")
+      timeStampStr.gsub! " ", "_"
+      Open3.popen3("cp ../data_struct01.ads ../../workspace/"\
+                   "autoruby/taskset/#{timeStampStr}") do |stdin, stdout, stderr, thread|
+         thread.value
+      end
+      Open3.popen3("cp ../data_struct01.ads ../ravenscar-edf/") do |stdin, stdout, stderr, thread|
+         thread.value
+      end
+      Open3.popen3("mv ../data_struct01.ads ../prio-ravenscar/") do |stdin, stdout, stderr, thread|
+         thread.value
+      end
+      puts "Datasets #{timeStampStr} Timestamped and Storaged."
+   end
+
+   def datasetReplacement_withBlock timeStamp, maxPrio, minDead
+      # This procedure replace the old data_struct01.ads file and puts it
+      # in a specific directory
+      timeStampStr = timeStamp.strftime("%Y-%m-%d %H:%M:%S.%6L")
+      timeStampStr.gsub! " ", "_"
+      Open3.popen3("cp ../dfp_data_struct01.ads ../../workspace/"\
+                   "autoruby/taskset/#{timeStampStr}") do |stdin, stdout, stderr, thread|
+         thread.value
+      end
+      Open3.popen3("cp ../dfp_data_struct01.ads ../ravenscar-edf/") do |stdin, stdout, stderr, thread|
+         thread.value
+      end
+      Open3.popen3("mv ../dfp_data_struct01.ads ../prio-ravenscar/") do |stdin, stdout, stderr, thread|
+         thread.value
+      end
+
+      ##################################################33
+      ##################################################33
+      ### va modificato il file contenente i dati di definizione degli oggetti protetti ovvero
+      ### dfp_test_procedure.ads
+
+      lines = File.readlines('../ravenscar-edf/dfp_test_procedure.ads')
+      lines[11] = "\t\tpragma Priority (#{minDead});" << $/
+      File.open('../ravenscar-edf/dfp_test_procedure.ads', 'w') { |f| f.write(lines.join) }
+
+      lines = File.readlines('../prio-ravenscar/dfp_test_procedure.ads')
+      lines[11] = "\t\tpragma Priority (#{maxPrio});" << $/
+      File.open('../prio-ravenscar/dfp_test_procedure.ads', 'w') { |f| f.write(lines.join) }
+
+      puts "Datasets #{timeStampStr} Timestamped and Storaged."
    end
 
    def printDataFile

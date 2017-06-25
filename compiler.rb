@@ -26,7 +26,7 @@ class Compiler
       end
    end
 
-   def compileUnit(unit)
+   def compileUnit unit
       Open3.popen3("make " + unit + " -C ../ravenscar-edf") do |stdin, stdout, stderr, thread|
          thread.value
          puts "EDF Unit01 Compilation Complete."
