@@ -102,7 +102,7 @@ class Generator
          raise 'Error size in generateDataset'
       end
       rta_calculus = RTA_Calculus.new @taskset
-      feasibilityEDF, maxLoadEDF = rta_calculus.computeRTAforEDF_withBlock
+      feasibilityEDF, maxLoadEDF = rta_calculus.computeRTAforEDF
       feasibilityFPS = rta_calculus.computeRTAforFPS
       printDataFile
       totalTasks = num_of_short + num_of_mid + num_of_long
@@ -153,61 +153,38 @@ class Generator
       when "implicit"
          case size
          when "short"
-            p = rand @param.short_period_range
+            p = rand @param.short_period_demo_mixed
             e = rand @param.short_impl_exec_range
          when "mid"
-            p = rand @param.mid_period_range
+            p = rand @param.mid_period_demo_mixed
             e = rand @param.mid_impl_exec_range
          when "long"
-            p = rand @param.long_period_range
+            p = rand @param.long_period_demo_mixed
             e = rand @param.long_impl_exec_range
          else
             raise 'Error size in generateSingleTask'
          end
          d = p
-      when "arbitrary"
-         case size
-         when "short"
-            p = rand @param.short_period_range
-            e = rand @param.short_arbit_exec_range
-            begin
-               d = rand @param.short_arbit_dead_range
-            end while d <= p
-         when "mid"
-            p = rand @param.mid_period_range
-            e = rand @param.mid_arbit_exec_range
-            begin
-               d = rand @param.mid_arbit_dead_range
-            end while d <= p
-         when "long"
-            p = rand @param.long_period_range
-            e = rand @param.long_arbit_exec_range
-            begin
-               d = rand @param.long_arbit_dead_range
-            end while d <= p
-         else
-            raise 'Error size in generateSingleTask'
-         end
       when "constrained"
          case size
          when "short"
-            p = rand @param.short_period_range
+            p = rand @param.short_period_demo_mixed
             e = rand @param.short_constr_exec_range
             begin
-               d = rand @param.short_constr_dead_range
-            end while d >= p
+               d = rand @param.short_constr_dead_demo_mixed
+            end while d <= p
          when "mid"
-            p = rand @param.mid_period_range
+            p = rand @param.mid_period_demo_mixed
             e = rand @param.mid_constr_exec_range
             begin
-               d = rand @param.mid_constr_dead_range
-            end while d >= p
+               d = rand @param.mid_constr_dead_demo_mixed
+            end while d <= p
          when "long"
-            p = rand @param.long_period_range
+            p = rand @param.long_period_demo_mixed
             e = rand @param.long_constr_exec_range
             begin
-               d = rand @param.long_constr_dead_range
-            end while d >= p
+               d = rand @param.long_constr_dead_demo_mixed
+            end while d <= p
          else
             raise 'Error size in generateSingleTask'
          end
@@ -215,8 +192,11 @@ class Generator
          raise 'Error size in generateSingleTask'
       end
 
-      @taskset.push BasicTask.new 0, 2 ** d, 2 ** p, 0, e
-      # puts "Prio: #{t.prio}\t Dead: #{t.dead}\t Period: #{t.period}\t Exec: #{t.exec}"
+      dead = expSolver (d)
+      period = expSolver (p)
+      t = BasicTask.new 0, dead, period, 0, e
+
+      @taskset.push t
    end
 
    def expSolver (code)

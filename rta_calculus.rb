@@ -89,6 +89,8 @@ class RTA_Calculus
       maxLoad = 0.0
       dfpWorks = true
       # hyperPeriod = (@taskset.max_by &:period).period
+      print @taskset
+
       periodicArray = @taskset.map(&:period)
       hyperPeriod = periodicArray.reduce(:lcm)
 
@@ -195,7 +197,7 @@ class RTA_Calculus
       @taskset.sort_by! {|t| t.dead}
       @taskset.each do |taskForDead|
          loopTimes = hyperPeriod / taskForDead.dead
-   puts "loopTimes: #{loopTimes}\n"
+         puts "loopTimes: #{loopTimes}\n"
          for iter in 1..loopTimes do
             t = (iter * taskForDead.period) - taskForDead.dead
             if t == 0 then t = 1 end

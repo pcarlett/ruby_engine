@@ -31,7 +31,6 @@ class Parameters_Extended
    attr_accessor :long_arbit_exec_range
    attr_accessor :taskset
    attr_accessor :exponentsDemo
-   attr_accessor :exponentsFull
 
    attr_accessor :short_num_task_range_1
    attr_accessor :mid_num_task_range_1
@@ -63,42 +62,16 @@ class Parameters_Extended
       ###################
       ##    PERIODS    ##
       ###################
-      @short_period_range      = 23..25 # 20..23 # 21..23 # 22..24 # 23..25 #
-      @mid_period_range        = 26..28 # 24..27 # 24..26 # 25..27 # 26..28 #
-      @long_period_range       = 29..31 # 28..31 # 27..29 # 28..30 # 29..31 #
-
-      # Wrong hyperperiod
-      # @short_period_demo_mixed = 255..290 #   6.350.400 -->  17.287.200
-      # @mid_period_demo_mixed   = 300..325 #  24.696.000 -->  66.679.200
-      # @long_period_demo_mixed  = 340..355 # 166.698.000 --> 777.924.000
-
-      @short_period_demo_mixed = 400..450 # 274..310 #   6.350.400 -->  17.781.120
-      @mid_period_demo_mixed   = 600..650 # 321..345 #  24.696.000 -->  66.679.200
-      @long_period_demo_mixed  = 800..850 # 361..374 # 166.698.000 --> 800.150.400
+      @short_period_demo_mixed = 300..450 # 274..310 #   6.350.400 -->  17.781.120
+      @mid_period_demo_mixed   = 590..730 # 321..345 #  24.696.000 -->  66.679.200
+      @long_period_demo_mixed  = 850..999 # 361..374 # 166.698.000 --> 800.150.400
 
       #####################
       ##    DEADLINES    ##
       #####################
-      @short_constr_dead_range = 21..23 # 23..25
-      @mid_constr_dead_range   = 24..26 # 26..28
-      @long_constr_dead_range  = 27..29 # 29..31
-
-      @short_arbit_dead_range  = 21..24 # 23..25
-      @mid_arbit_dead_range    = 25..28 # 26..28
-      @long_arbit_dead_range   = 29..32 # 29..31
-
-      # Wrong hyperperiod
-      # @short_constr_dead_demo_mixed = 220..265 # 2.593.080  8.232.000
-      # @mid_constr_dead_demo_mixed   = 285..310 # 14.817.600  34.574.400
-      # @long_constr_dead_demo_mixed  = 335..350 # 116.688.600  388.962.000
-
-      @short_constr_dead_demo_mixed = 236..284 #   2.540.160 -->   8.232.000
-      @mid_constr_dead_demo_mixed   = 304..329 #  14.288.400 -->  33.339.600
-      @long_constr_dead_demo_mixed  = 355..368 # 114.307.200 --> 333.396.000
-
-      @short_arbit_dead_demo_mixed = 239..271 #
-      @mid_arbit_dead_demo_mixed   = 313..332 #
-      @long_arbit_dead_demo_mixed  = 351..360 #
+      @short_constr_dead_demo_mixed = 350..500  #   2.540.160 -->   8.232.000
+      @mid_constr_dead_demo_mixed   = 640..780  #  14.288.400 -->  33.339.600
+      @long_constr_dead_demo_mixed  = 900..1050 # 114.307.200 --> 333.396.000
 
       #################
       ##    EXECS    ##
@@ -113,10 +86,6 @@ class Parameters_Extended
       @short_constr_exec_range =   10000..25000   #   10000..25000
       @mid_constr_exec_range   =   50000..150000  #  100000..250000
       @long_constr_exec_range  =  300000..750000  # 1000000..2500000
-
-      @short_arbit_exec_range  =   100000..250000
-      @mid_arbit_exec_range    =  1000000..2500000
-      @long_arbit_exec_range   = 10000000..25000000
 
       #########################################
       ##    TASK NUMS   (183 Tasks Limit)    ##
@@ -458,158 +427,158 @@ class Parameters_Extended
       @exponentsDemo[[8, 3, 1, 2]] = 296  # => 1.693.440
       @exponentsDemo[[3, 5, 3, 1]] = 297  # => 1.701.000
       @exponentsDemo[[4, 2, 1, 4]] = 298  # => 1.728.720
-      @exponentsDemo[[5, 2, 3, 2]] = 299  # => 1.764.000
-      @exponentsDemo[[1, 6, 2, 2]] = 300  # => 1.786.050
-      @exponentsDemo[[1, 1, 3, 4]] = 301  # => 1.800.750
-      @exponentsDemo[[7, 4, 2, 1]] = 302  # => 1.814.400
-      @exponentsDemo[[3, 8, 1, 1]] = 303  # => 1.837.080
-      @exponentsDemo[[2, 1, 5, 2]] = 304  # => 1.837.500
-      @exponentsDemo[[3, 3, 2, 3]] = 305  # => 1.852.200
-      @exponentsDemo[[9, 1, 2, 2]] = 306  # => 1.881.600
-      @exponentsDemo[[4, 3, 4, 1]] = 307  # => 1.890.000
-      @exponentsDemo[[5, 5, 1, 2]] = 308  # => 1.905.120
-      @exponentsDemo[[1, 4, 1, 4]] = 309  # => 1.944.810
-      @exponentsDemo[[7, 2, 1, 3]] = 310  # => 1.975.680
-      @exponentsDemo[[2, 4, 3, 2]] = 311  # => 1.984.500
-      @exponentsDemo[[8, 2, 3, 1]] = 312  # => 2.016.000
-      @exponentsDemo[[4, 6, 2, 1]] = 313  # => 2.041.200
-      @exponentsDemo[[4, 1, 3, 3]] = 314  # => 2.058.000
-      @exponentsDemo[[5, 1, 5, 1]] = 315  # => 2.100.000
-      @exponentsDemo[[6, 3, 2, 2]] = 316  # => 2.116.800
-      @exponentsDemo[[1, 5, 4, 1]] = 317  # => 2.126.250
-      @exponentsDemo[[2, 7, 1, 2]] = 318  # => 2.143.260
-      @exponentsDemo[[2, 2, 2, 4]] = 319  # => 2.160.900
-      @exponentsDemo[[8, 5, 1, 1]] = 320  # => 2.177.280
-      @exponentsDemo[[3, 2, 4, 2]] = 321  # => 2.205.000
-      @exponentsDemo[[4, 4, 1, 3]] = 322  # => 2.222.640
-      @exponentsDemo[[5, 4, 3, 1]] = 323  # => 2.268.000
-      @exponentsDemo[[1, 8, 2, 1]] = 324  # => 2.296.350
-      @exponentsDemo[[6, 1, 1, 4]] = 325  # => 2.304.960
-      @exponentsDemo[[1, 3, 3, 3]] = 326  # => 2.315.250
-      @exponentsDemo[[7, 1, 3, 2]] = 327  # => 2.352.000
-      @exponentsDemo[[2, 3, 5, 1]] = 328  # => 2.362.500
-      @exponentsDemo[[3, 5, 2, 2]] = 329  # => 2.381.400
-      @exponentsDemo[[9, 3, 2, 1]] = 330  # => 2.419.200
-      @exponentsDemo[[5, 7, 1, 1]] = 331  # => 2.449.440
-      @exponentsDemo[[5, 2, 2, 3]] = 332  # => 2.469.600
-      @exponentsDemo[[1, 6, 1, 3]] = 333  # => 2.500.470
-      @exponentsDemo[[6, 2, 4, 1]] = 334  # => 2.520.000
-      @exponentsDemo[[7, 4, 1, 2]] = 335  # => 2.540.160
-      @exponentsDemo[[2, 6, 3, 1]] = 336  # => 2.551.500
-      @exponentsDemo[[2, 1, 4, 3]] = 337  # => 2.572.500
-      @exponentsDemo[[3, 3, 1, 4]] = 338  # => 2.593.080
-      @exponentsDemo[[9, 1, 1, 3]] = 339  # => 2.634.240
-      @exponentsDemo[[4, 3, 3, 2]] = 340  # => 2.646.000
-      @exponentsDemo[[6, 5, 2, 1]] = 341  # => 2.721.600
-      @exponentsDemo[[1, 2, 5, 2]] = 342  # => 2.756.250
-      @exponentsDemo[[2, 4, 2, 3]] = 343  # => 2.778.300
-      @exponentsDemo[[8, 2, 2, 2]] = 344  # => 2.822.400
-      @exponentsDemo[[3, 4, 4, 1]] = 345  # => 2.835.000
-      @exponentsDemo[[4, 6, 1, 2]] = 346  # => 2.857.680
-      @exponentsDemo[[4, 1, 2, 4]] = 347  # => 2.881.200
-      @exponentsDemo[[5, 1, 4, 2]] = 348  # => 2.940.000
-      @exponentsDemo[[6, 3, 1, 3]] = 349  # => 2.963.520
-      @exponentsDemo[[1, 5, 3, 2]] = 350  # => 2.976.750
-      @exponentsDemo[[7, 3, 3, 1]] = 351  # => 3.024.000
-      @exponentsDemo[[3, 7, 2, 1]] = 352  # => 3.061.800
-      @exponentsDemo[[3, 2, 3, 3]] = 353  # => 3.087.000
-      @exponentsDemo[[4, 2, 5, 1]] = 354  # => 3.150.000
-      @exponentsDemo[[5, 4, 2, 2]] = 355  # => 3.175.200
-      @exponentsDemo[[1, 8, 1, 2]] = 356  # => 3.214.890
-      @exponentsDemo[[1, 3, 2, 4]] = 357  # => 3.241.350
-      @exponentsDemo[[7, 6, 1, 1]] = 358  # => 3.265.920
-      @exponentsDemo[[7, 1, 2, 3]] = 359  # => 3.292.800
-      @exponentsDemo[[2, 3, 4, 2]] = 360  # => 3.307.500
-      @exponentsDemo[[3, 5, 1, 3]] = 361  # => 3.333.960
-      @exponentsDemo[[8, 1, 4, 1]] = 362  # => 3.360.000
-      @exponentsDemo[[9, 3, 1, 2]] = 363  # => 3.386.880
-      @exponentsDemo[[4, 5, 3, 1]] = 364  # => 3.402.000
-      @exponentsDemo[[5, 2, 1, 4]] = 365  # => 3.457.440
-      @exponentsDemo[[6, 2, 3, 2]] = 366  # => 3.528.000
-      @exponentsDemo[[1, 4, 5, 1]] = 367  # => 3.543.750
-      @exponentsDemo[[2, 6, 2, 2]] = 368  # => 3.572.100
-      @exponentsDemo[[2, 1, 3, 4]] = 369  # => 3.601.500
-      @exponentsDemo[[8, 4, 2, 1]] = 370  # => 3.628.800
-      @exponentsDemo[[4, 8, 1, 1]] = 371  # => 3.674.160
-      @exponentsDemo[[3, 1, 5, 2]] = 372  # => 3.675.000
-      @exponentsDemo[[4, 3, 2, 3]] = 373  # => 3.704.400
-      @exponentsDemo[[5, 3, 4, 1]] = 374  # => 3.780.000
-      @exponentsDemo[[6, 5, 1, 2]] = 375  # => 3.810.240
-      @exponentsDemo[[1, 7, 3, 1]] = 376  # => 3.827.250
-      @exponentsDemo[[1, 2, 4, 3]] = 377  # => 3.858.750
-      @exponentsDemo[[2, 4, 1, 4]] = 378  # => 3.889.620
-      @exponentsDemo[[8, 2, 1, 3]] = 379  # => 3.951.360
-      @exponentsDemo[[3, 4, 3, 2]] = 380  # => 3.969.000
-      @exponentsDemo[[9, 2, 3, 1]] = 381  # => 4.032.000
-      @exponentsDemo[[5, 6, 2, 1]] = 382  # => 4.082.400
-      @exponentsDemo[[5, 1, 3, 3]] = 383  # => 4.116.000
-      @exponentsDemo[[1, 5, 2, 3]] = 384  # => 4.167.450
-      @exponentsDemo[[6, 1, 5, 1]] = 385  # => 4.200.000
-      @exponentsDemo[[7, 3, 2, 2]] = 386  # => 4.233.600
-      @exponentsDemo[[2, 5, 4, 1]] = 387  # => 4.252.500
-      @exponentsDemo[[3, 7, 1, 2]] = 388  # => 4.286.520
-      @exponentsDemo[[3, 2, 2, 4]] = 389  # => 4.321.800
-      @exponentsDemo[[9, 5, 1, 1]] = 390  # => 4.354.560
-      @exponentsDemo[[4, 2, 4, 2]] = 391  # => 4.410.000
-      @exponentsDemo[[5, 4, 1, 3]] = 392  # => 4.445.280
-      @exponentsDemo[[6, 4, 3, 1]] = 393  # => 4.536.000
-      @exponentsDemo[[2, 8, 2, 1]] = 394  # => 4.592.700
-      @exponentsDemo[[7, 1, 1, 4]] = 395  # => 4.609.920
-      @exponentsDemo[[2, 3, 3, 3]] = 396  # => 4.630.500
-      @exponentsDemo[[8, 1, 3, 2]] = 397  # => 4.704.000
-      @exponentsDemo[[3, 3, 5, 1]] = 398  # => 4.725.000
-      @exponentsDemo[[4, 5, 2, 2]] = 399  # => 4.762.800
-      @exponentsDemo[[6, 7, 1, 1]] = 400  # => 4.898.880
-      @exponentsDemo[[6, 2, 2, 3]] = 401  # => 4.939.200
-      @exponentsDemo[[1, 4, 4, 2]] = 402  # => 4.961.250
-      @exponentsDemo[[2, 6, 1, 3]] = 403  # => 5.000.940
-      @exponentsDemo[[7, 2, 4, 1]] = 404  # => 5.040.000
-      @exponentsDemo[[8, 4, 1, 2]] = 405  # => 5.080.320
-      @exponentsDemo[[3, 6, 3, 1]] = 406  # => 5.103.000
-      @exponentsDemo[[3, 1, 4, 3]] = 407  # => 5.145.000
-      @exponentsDemo[[4, 3, 1, 4]] = 408  # => 5.186.160
-      @exponentsDemo[[5, 3, 3, 2]] = 409  # => 5.292.000
-      @exponentsDemo[[1, 7, 2, 2]] = 410  # => 5.358.150
-      @exponentsDemo[[1, 2, 3, 4]] = 411  # => 5.402.250
-      @exponentsDemo[[7, 5, 2, 1]] = 412  # => 5.443.200
-      @exponentsDemo[[2, 2, 5, 2]] = 413  # => 5.512.500
-      @exponentsDemo[[3, 4, 2, 3]] = 414  # => 5.556.600
-      @exponentsDemo[[9, 2, 2, 2]] = 415  # => 5.644.800
-      @exponentsDemo[[4, 4, 4, 1]] = 416  # => 5.670.000
-      @exponentsDemo[[5, 6, 1, 2]] = 417  # => 5.715.360
-      @exponentsDemo[[5, 1, 2, 4]] = 418  # => 5.762.400
-      @exponentsDemo[[1, 5, 1, 4]] = 419  # => 5.834.430
-      @exponentsDemo[[6, 1, 4, 2]] = 420  # => 5.880.000
-      @exponentsDemo[[7, 3, 1, 3]] = 421  # => 5.927.040
-      @exponentsDemo[[2, 5, 3, 2]] = 422  # => 5.953.500
-      @exponentsDemo[[8, 3, 3, 1]] = 423  # => 6.048.000
-      @exponentsDemo[[4, 7, 2, 1]] = 424  # => 6.123.600
-      @exponentsDemo[[4, 2, 3, 3]] = 425  # => 6.174.000
-      @exponentsDemo[[5, 2, 5, 1]] = 426  # => 6.300.000
-      @exponentsDemo[[6, 4, 2, 2]] = 427  # => 6.350.400
-      @exponentsDemo[[1, 6, 4, 1]] = 428  # => 6.378.750
-      @exponentsDemo[[2, 8, 1, 2]] = 429  # => 6.429.780
-      @exponentsDemo[[1, 1, 5, 3]] = 430  # => 6.431.250
-      @exponentsDemo[[2, 3, 2, 4]] = 431  # => 6.482.700
-      @exponentsDemo[[8, 6, 1, 1]] = 432  # => 6.531.840
-      @exponentsDemo[[8, 1, 2, 3]] = 433  # => 6.585.600
-      @exponentsDemo[[3, 3, 4, 2]] = 434  # => 6.615.000
-      @exponentsDemo[[4, 5, 1, 3]] = 435  # => 6.667.920
-      @exponentsDemo[[9, 1, 4, 1]] = 436  # => 6.720.000
-      @exponentsDemo[[5, 5, 3, 1]] = 437  # => 6.804.000
-      @exponentsDemo[[6, 2, 1, 4]] = 438  # => 6.914.880
-      @exponentsDemo[[1, 4, 3, 3]] = 439  # => 6.945.750
-      @exponentsDemo[[7, 2, 3, 2]] = 440  # => 7.056.000
-      @exponentsDemo[[2, 4, 5, 1]] = 441  # => 7.087.500
-      @exponentsDemo[[3, 6, 2, 2]] = 442  # => 7.144.200
-      @exponentsDemo[[3, 1, 3, 4]] = 443  # => 7.203.000
-      @exponentsDemo[[9, 4, 2, 1]] = 444  # => 7.257.600
-      @exponentsDemo[[5, 8, 1, 1]] = 445  # => 7.348.320
-      @exponentsDemo[[4, 1, 5, 2]] = 446  # => 7.350.000
-      @exponentsDemo[[5, 3, 2, 3]] = 447  # => 7.408.800
-      @exponentsDemo[[1, 7, 1, 3]] = 448  # => 7.501.410
-      @exponentsDemo[[6, 3, 4, 1]] = 449  # => 7.560.000
-      @exponentsDemo[[7, 5, 1, 2]] = 450  # => 7.620.480
+      @exponentsDemo[[5, 2, 3, 2]] = 299  # => 1.764.000 # ==> SHORT
+      @exponentsDemo[[1, 6, 2, 2]] = 300  # => 1.786.050 # ==> SHORT
+      @exponentsDemo[[1, 1, 3, 4]] = 301  # => 1.800.750 # ==> SHORT
+      @exponentsDemo[[7, 4, 2, 1]] = 302  # => 1.814.400 # ==> SHORT
+      @exponentsDemo[[3, 8, 1, 1]] = 303  # => 1.837.080 # ==> SHORT
+      @exponentsDemo[[2, 1, 5, 2]] = 304  # => 1.837.500 # ==> SHORT
+      @exponentsDemo[[3, 3, 2, 3]] = 305  # => 1.852.200 # ==> SHORT
+      @exponentsDemo[[9, 1, 2, 2]] = 306  # => 1.881.600 # ==> SHORT
+      @exponentsDemo[[4, 3, 4, 1]] = 307  # => 1.890.000 # ==> SHORT
+      @exponentsDemo[[5, 5, 1, 2]] = 308  # => 1.905.120 # ==> SHORT
+      @exponentsDemo[[1, 4, 1, 4]] = 309  # => 1.944.810 # ==> SHORT
+      @exponentsDemo[[7, 2, 1, 3]] = 310  # => 1.975.680 # ==> SHORT
+      @exponentsDemo[[2, 4, 3, 2]] = 311  # => 1.984.500 # ==> SHORT
+      @exponentsDemo[[8, 2, 3, 1]] = 312  # => 2.016.000 # ==> SHORT
+      @exponentsDemo[[4, 6, 2, 1]] = 313  # => 2.041.200 # ==> SHORT
+      @exponentsDemo[[4, 1, 3, 3]] = 314  # => 2.058.000 # ==> SHORT
+      @exponentsDemo[[5, 1, 5, 1]] = 315  # => 2.100.000 # ==> SHORT
+      @exponentsDemo[[6, 3, 2, 2]] = 316  # => 2.116.800 # ==> SHORT
+      @exponentsDemo[[1, 5, 4, 1]] = 317  # => 2.126.250 # ==> SHORT
+      @exponentsDemo[[2, 7, 1, 2]] = 318  # => 2.143.260 # ==> SHORT
+      @exponentsDemo[[2, 2, 2, 4]] = 319  # => 2.160.900 # ==> SHORT
+      @exponentsDemo[[8, 5, 1, 1]] = 320  # => 2.177.280 # ==> SHORT
+      @exponentsDemo[[3, 2, 4, 2]] = 321  # => 2.205.000 # ==> SHORT
+      @exponentsDemo[[4, 4, 1, 3]] = 322  # => 2.222.640 # ==> SHORT
+      @exponentsDemo[[5, 4, 3, 1]] = 323  # => 2.268.000 # ==> SHORT
+      @exponentsDemo[[1, 8, 2, 1]] = 324  # => 2.296.350 # ==> SHORT
+      @exponentsDemo[[6, 1, 1, 4]] = 325  # => 2.304.960 # ==> SHORT
+      @exponentsDemo[[1, 3, 3, 3]] = 326  # => 2.315.250 # ==> SHORT
+      @exponentsDemo[[7, 1, 3, 2]] = 327  # => 2.352.000 # ==> SHORT
+      @exponentsDemo[[2, 3, 5, 1]] = 328  # => 2.362.500 # ==> SHORT
+      @exponentsDemo[[3, 5, 2, 2]] = 329  # => 2.381.400 # ==> SHORT
+      @exponentsDemo[[9, 3, 2, 1]] = 330  # => 2.419.200 # ==> SHORT
+      @exponentsDemo[[5, 7, 1, 1]] = 331  # => 2.449.440 # ==> SHORT
+      @exponentsDemo[[5, 2, 2, 3]] = 332  # => 2.469.600 # ==> SHORT
+      @exponentsDemo[[1, 6, 1, 3]] = 333  # => 2.500.470 # ==> SHORT
+      @exponentsDemo[[6, 2, 4, 1]] = 334  # => 2.520.000 # ==> SHORT
+      @exponentsDemo[[7, 4, 1, 2]] = 335  # => 2.540.160 # ==> SHORT
+      @exponentsDemo[[2, 6, 3, 1]] = 336  # => 2.551.500 # ==> SHORT
+      @exponentsDemo[[2, 1, 4, 3]] = 337  # => 2.572.500 # ==> SHORT
+      @exponentsDemo[[3, 3, 1, 4]] = 338  # => 2.593.080 # ==> SHORT
+      @exponentsDemo[[9, 1, 1, 3]] = 339  # => 2.634.240 # ==> SHORT
+      @exponentsDemo[[4, 3, 3, 2]] = 340  # => 2.646.000 # ==> SHORT
+      @exponentsDemo[[6, 5, 2, 1]] = 341  # => 2.721.600 # ==> SHORT
+      @exponentsDemo[[1, 2, 5, 2]] = 342  # => 2.756.250 # ==> SHORT
+      @exponentsDemo[[2, 4, 2, 3]] = 343  # => 2.778.300 # ==> SHORT
+      @exponentsDemo[[8, 2, 2, 2]] = 344  # => 2.822.400 # ==> SHORT
+      @exponentsDemo[[3, 4, 4, 1]] = 345  # => 2.835.000 # ==> SHORT
+      @exponentsDemo[[4, 6, 1, 2]] = 346  # => 2.857.680 # ==> SHORT
+      @exponentsDemo[[4, 1, 2, 4]] = 347  # => 2.881.200 # ==> SHORT
+      @exponentsDemo[[5, 1, 4, 2]] = 348  # => 2.940.000 # ==> SHORT
+      @exponentsDemo[[6, 3, 1, 3]] = 349  # => 2.963.520 # ==> SHORT
+      @exponentsDemo[[1, 5, 3, 2]] = 350  # => 2.976.750 # ==> SHORT
+      @exponentsDemo[[7, 3, 3, 1]] = 351  # => 3.024.000 # ==> SHORT
+      @exponentsDemo[[3, 7, 2, 1]] = 352  # => 3.061.800 # ==> SHORT
+      @exponentsDemo[[3, 2, 3, 3]] = 353  # => 3.087.000 # ==> SHORT
+      @exponentsDemo[[4, 2, 5, 1]] = 354  # => 3.150.000 # ==> SHORT
+      @exponentsDemo[[5, 4, 2, 2]] = 355  # => 3.175.200 # ==> SHORT
+      @exponentsDemo[[1, 8, 1, 2]] = 356  # => 3.214.890 # ==> SHORT
+      @exponentsDemo[[1, 3, 2, 4]] = 357  # => 3.241.350 # ==> SHORT
+      @exponentsDemo[[7, 6, 1, 1]] = 358  # => 3.265.920 # ==> SHORT
+      @exponentsDemo[[7, 1, 2, 3]] = 359  # => 3.292.800 # ==> SHORT
+      @exponentsDemo[[2, 3, 4, 2]] = 360  # => 3.307.500 # ==> SHORT
+      @exponentsDemo[[3, 5, 1, 3]] = 361  # => 3.333.960 # ==> SHORT
+      @exponentsDemo[[8, 1, 4, 1]] = 362  # => 3.360.000 # ==> SHORT
+      @exponentsDemo[[9, 3, 1, 2]] = 363  # => 3.386.880 # ==> SHORT
+      @exponentsDemo[[4, 5, 3, 1]] = 364  # => 3.402.000 # ==> SHORT
+      @exponentsDemo[[5, 2, 1, 4]] = 365  # => 3.457.440 # ==> SHORT
+      @exponentsDemo[[6, 2, 3, 2]] = 366  # => 3.528.000 # ==> SHORT
+      @exponentsDemo[[1, 4, 5, 1]] = 367  # => 3.543.750 # ==> SHORT
+      @exponentsDemo[[2, 6, 2, 2]] = 368  # => 3.572.100 # ==> SHORT
+      @exponentsDemo[[2, 1, 3, 4]] = 369  # => 3.601.500 # ==> SHORT
+      @exponentsDemo[[8, 4, 2, 1]] = 370  # => 3.628.800 # ==> SHORT
+      @exponentsDemo[[4, 8, 1, 1]] = 371  # => 3.674.160 # ==> SHORT
+      @exponentsDemo[[3, 1, 5, 2]] = 372  # => 3.675.000 # ==> SHORT
+      @exponentsDemo[[4, 3, 2, 3]] = 373  # => 3.704.400 # ==> SHORT
+      @exponentsDemo[[5, 3, 4, 1]] = 374  # => 3.780.000 # ==> SHORT
+      @exponentsDemo[[6, 5, 1, 2]] = 375  # => 3.810.240 # ==> SHORT
+      @exponentsDemo[[1, 7, 3, 1]] = 376  # => 3.827.250 # ==> SHORT
+      @exponentsDemo[[1, 2, 4, 3]] = 377  # => 3.858.750 # ==> SHORT
+      @exponentsDemo[[2, 4, 1, 4]] = 378  # => 3.889.620 # ==> SHORT
+      @exponentsDemo[[8, 2, 1, 3]] = 379  # => 3.951.360 # ==> SHORT
+      @exponentsDemo[[3, 4, 3, 2]] = 380  # => 3.969.000 # ==> SHORT
+      @exponentsDemo[[9, 2, 3, 1]] = 381  # => 4.032.000 # ==> SHORT
+      @exponentsDemo[[5, 6, 2, 1]] = 382  # => 4.082.400 # ==> SHORT
+      @exponentsDemo[[5, 1, 3, 3]] = 383  # => 4.116.000 # ==> SHORT
+      @exponentsDemo[[1, 5, 2, 3]] = 384  # => 4.167.450 # ==> SHORT
+      @exponentsDemo[[6, 1, 5, 1]] = 385  # => 4.200.000 # ==> SHORT
+      @exponentsDemo[[7, 3, 2, 2]] = 386  # => 4.233.600 # ==> SHORT
+      @exponentsDemo[[2, 5, 4, 1]] = 387  # => 4.252.500 # ==> SHORT
+      @exponentsDemo[[3, 7, 1, 2]] = 388  # => 4.286.520 # ==> SHORT
+      @exponentsDemo[[3, 2, 2, 4]] = 389  # => 4.321.800 # ==> SHORT
+      @exponentsDemo[[9, 5, 1, 1]] = 390  # => 4.354.560 # ==> SHORT
+      @exponentsDemo[[4, 2, 4, 2]] = 391  # => 4.410.000 # ==> SHORT
+      @exponentsDemo[[5, 4, 1, 3]] = 392  # => 4.445.280 # ==> SHORT
+      @exponentsDemo[[6, 4, 3, 1]] = 393  # => 4.536.000 # ==> SHORT
+      @exponentsDemo[[2, 8, 2, 1]] = 394  # => 4.592.700 # ==> SHORT
+      @exponentsDemo[[7, 1, 1, 4]] = 395  # => 4.609.920 # ==> SHORT
+      @exponentsDemo[[2, 3, 3, 3]] = 396  # => 4.630.500 # ==> SHORT
+      @exponentsDemo[[8, 1, 3, 2]] = 397  # => 4.704.000 # ==> SHORT
+      @exponentsDemo[[3, 3, 5, 1]] = 398  # => 4.725.000 # ==> SHORT
+      @exponentsDemo[[4, 5, 2, 2]] = 399  # => 4.762.800 # ==> SHORT
+      @exponentsDemo[[6, 7, 1, 1]] = 400  # => 4.898.880 # ==> SHORT
+      @exponentsDemo[[6, 2, 2, 3]] = 401  # => 4.939.200 # ==> SHORT
+      @exponentsDemo[[1, 4, 4, 2]] = 402  # => 4.961.250 # ==> SHORT
+      @exponentsDemo[[2, 6, 1, 3]] = 403  # => 5.000.940 # ==> SHORT
+      @exponentsDemo[[7, 2, 4, 1]] = 404  # => 5.040.000 # ==> SHORT
+      @exponentsDemo[[8, 4, 1, 2]] = 405  # => 5.080.320 # ==> SHORT
+      @exponentsDemo[[3, 6, 3, 1]] = 406  # => 5.103.000 # ==> SHORT
+      @exponentsDemo[[3, 1, 4, 3]] = 407  # => 5.145.000 # ==> SHORT
+      @exponentsDemo[[4, 3, 1, 4]] = 408  # => 5.186.160 # ==> SHORT
+      @exponentsDemo[[5, 3, 3, 2]] = 409  # => 5.292.000 # ==> SHORT
+      @exponentsDemo[[1, 7, 2, 2]] = 410  # => 5.358.150 # ==> SHORT
+      @exponentsDemo[[1, 2, 3, 4]] = 411  # => 5.402.250 # ==> SHORT
+      @exponentsDemo[[7, 5, 2, 1]] = 412  # => 5.443.200 # ==> SHORT
+      @exponentsDemo[[2, 2, 5, 2]] = 413  # => 5.512.500 # ==> SHORT
+      @exponentsDemo[[3, 4, 2, 3]] = 414  # => 5.556.600 # ==> SHORT
+      @exponentsDemo[[9, 2, 2, 2]] = 415  # => 5.644.800 # ==> SHORT
+      @exponentsDemo[[4, 4, 4, 1]] = 416  # => 5.670.000 # ==> SHORT
+      @exponentsDemo[[5, 6, 1, 2]] = 417  # => 5.715.360 # ==> SHORT
+      @exponentsDemo[[5, 1, 2, 4]] = 418  # => 5.762.400 # ==> SHORT
+      @exponentsDemo[[1, 5, 1, 4]] = 419  # => 5.834.430 # ==> SHORT
+      @exponentsDemo[[6, 1, 4, 2]] = 420  # => 5.880.000 # ==> SHORT
+      @exponentsDemo[[7, 3, 1, 3]] = 421  # => 5.927.040 # ==> SHORT
+      @exponentsDemo[[2, 5, 3, 2]] = 422  # => 5.953.500 # ==> SHORT
+      @exponentsDemo[[8, 3, 3, 1]] = 423  # => 6.048.000 # ==> SHORT
+      @exponentsDemo[[4, 7, 2, 1]] = 424  # => 6.123.600 # ==> SHORT
+      @exponentsDemo[[4, 2, 3, 3]] = 425  # => 6.174.000 # ==> SHORT
+      @exponentsDemo[[5, 2, 5, 1]] = 426  # => 6.300.000 # ==> SHORT
+      @exponentsDemo[[6, 4, 2, 2]] = 427  # => 6.350.400 # ==> SHORT
+      @exponentsDemo[[1, 6, 4, 1]] = 428  # => 6.378.750 # ==> SHORT
+      @exponentsDemo[[2, 8, 1, 2]] = 429  # => 6.429.780 # ==> SHORT
+      @exponentsDemo[[1, 1, 5, 3]] = 430  # => 6.431.250 # ==> SHORT
+      @exponentsDemo[[2, 3, 2, 4]] = 431  # => 6.482.700 # ==> SHORT
+      @exponentsDemo[[8, 6, 1, 1]] = 432  # => 6.531.840 # ==> SHORT
+      @exponentsDemo[[8, 1, 2, 3]] = 433  # => 6.585.600 # ==> SHORT
+      @exponentsDemo[[3, 3, 4, 2]] = 434  # => 6.615.000 # ==> SHORT
+      @exponentsDemo[[4, 5, 1, 3]] = 435  # => 6.667.920 # ==> SHORT
+      @exponentsDemo[[9, 1, 4, 1]] = 436  # => 6.720.000 # ==> SHORT
+      @exponentsDemo[[5, 5, 3, 1]] = 437  # => 6.804.000 # ==> SHORT
+      @exponentsDemo[[6, 2, 1, 4]] = 438  # => 6.914.880 # ==> SHORT
+      @exponentsDemo[[1, 4, 3, 3]] = 439  # => 6.945.750 # ==> SHORT
+      @exponentsDemo[[7, 2, 3, 2]] = 440  # => 7.056.000 # ==> SHORT
+      @exponentsDemo[[2, 4, 5, 1]] = 441  # => 7.087.500 # ==> SHORT
+      @exponentsDemo[[3, 6, 2, 2]] = 442  # => 7.144.200 # ==> SHORT
+      @exponentsDemo[[3, 1, 3, 4]] = 443  # => 7.203.000 # ==> SHORT
+      @exponentsDemo[[9, 4, 2, 1]] = 444  # => 7.257.600 # ==> SHORT
+      @exponentsDemo[[5, 8, 1, 1]] = 445  # => 7.348.320 # ==> SHORT
+      @exponentsDemo[[4, 1, 5, 2]] = 446  # => 7.350.000 # ==> SHORT
+      @exponentsDemo[[5, 3, 2, 3]] = 447  # => 7.408.800 # ==> SHORT
+      @exponentsDemo[[1, 7, 1, 3]] = 448  # => 7.501.410 # ==> SHORT
+      @exponentsDemo[[6, 3, 4, 1]] = 449  # => 7.560.000 # ==> SHORT
+      @exponentsDemo[[7, 5, 1, 2]] = 450  # => 7.620.480 # ==> SHORT
       @exponentsDemo[[2, 7, 3, 1]] = 451  # => 7.654.500
       @exponentsDemo[[2, 2, 4, 3]] = 452  # => 7.717.500
       @exponentsDemo[[3, 4, 1, 4]] = 453  # => 7.779.240
@@ -749,147 +718,147 @@ class Parameters_Extended
       @exponentsDemo[[1, 4, 5, 2]] = 587  # => 24.806.250
       @exponentsDemo[[2, 6, 2, 3]] = 588  # => 25.004.700
       @exponentsDemo[[7, 2, 5, 1]] = 589  # => 25.200.000
-      @exponentsDemo[[8, 4, 2, 2]] = 590  # => 25.401.600
-      @exponentsDemo[[3, 6, 4, 1]] = 591  # => 25.515.000
-      @exponentsDemo[[4, 8, 1, 2]] = 592  # => 25.719.120
-      @exponentsDemo[[3, 1, 5, 3]] = 593  # => 25.725.000
-      @exponentsDemo[[4, 3, 2, 4]] = 594  # => 25.930.800
-      @exponentsDemo[[5, 3, 4, 2]] = 595  # => 26.460.000
-      @exponentsDemo[[6, 5, 1, 3]] = 596  # => 26.671.680
-      @exponentsDemo[[1, 7, 3, 2]] = 597  # => 26.790.750
-      @exponentsDemo[[1, 2, 4, 4]] = 598  # => 27.011.250
-      @exponentsDemo[[7, 5, 3, 1]] = 599  # => 27.216.000
-      @exponentsDemo[[8, 2, 1, 4]] = 600  # => 27.659.520
-      @exponentsDemo[[3, 4, 3, 3]] = 601  # => 27.783.000
-      @exponentsDemo[[9, 2, 3, 2]] = 602  # => 28.224.000
-      @exponentsDemo[[4, 4, 5, 1]] = 603  # => 28.350.000
-      @exponentsDemo[[5, 6, 2, 2]] = 604  # => 28.576.800
-      @exponentsDemo[[5, 1, 3, 4]] = 605  # => 28.812.000
-      @exponentsDemo[[1, 5, 2, 4]] = 606  # => 29.172.150
-      @exponentsDemo[[7, 8, 1, 1]] = 607  # => 29.393.280
-      @exponentsDemo[[6, 1, 5, 2]] = 608  # => 29.400.000
-      @exponentsDemo[[7, 3, 2, 3]] = 609  # => 29.635.200
-      @exponentsDemo[[2, 5, 4, 2]] = 610  # => 29.767.500
-      @exponentsDemo[[3, 7, 1, 3]] = 611  # => 30.005.640
-      @exponentsDemo[[8, 3, 4, 1]] = 612  # => 30.240.000
-      @exponentsDemo[[9, 5, 1, 2]] = 613  # => 30.481.920
-      @exponentsDemo[[4, 7, 3, 1]] = 614  # => 30.618.000
-      @exponentsDemo[[4, 2, 4, 3]] = 615  # => 30.870.000
-      @exponentsDemo[[5, 4, 1, 4]] = 616  # => 31.116.960
-      @exponentsDemo[[6, 4, 3, 2]] = 617  # => 31.752.000
-      @exponentsDemo[[1, 6, 5, 1]] = 618  # => 31.893.750
-      @exponentsDemo[[2, 8, 2, 2]] = 619  # => 32.148.900
-      @exponentsDemo[[2, 3, 3, 4]] = 620  # => 32.413.500
-      @exponentsDemo[[8, 6, 2, 1]] = 621  # => 32.659.200
-      @exponentsDemo[[8, 1, 3, 3]] = 622  # => 32.928.000
-      @exponentsDemo[[3, 3, 5, 2]] = 623  # => 33.075.000
-      @exponentsDemo[[4, 5, 2, 3]] = 624  # => 33.339.600
-      @exponentsDemo[[9, 1, 5, 1]] = 625  # => 33.600.000
-      @exponentsDemo[[5, 5, 4, 1]] = 626  # => 34.020.000
-      @exponentsDemo[[6, 7, 1, 2]] = 627  # => 34.292.160
-      @exponentsDemo[[6, 2, 2, 4]] = 628  # => 34.574.400
-      @exponentsDemo[[1, 4, 4, 3]] = 629  # => 34.728.750
-      @exponentsDemo[[2, 6, 1, 4]] = 630  # => 35.006.580
-      @exponentsDemo[[7, 2, 4, 2]] = 631  # => 35.280.000
-      @exponentsDemo[[8, 4, 1, 3]] = 632  # => 35.562.240
-      @exponentsDemo[[3, 6, 3, 2]] = 633  # => 35.721.000
-      @exponentsDemo[[3, 1, 4, 4]] = 634  # => 36.015.000
-      @exponentsDemo[[9, 4, 3, 1]] = 635  # => 36.288.000
-      @exponentsDemo[[5, 8, 2, 1]] = 636  # => 36.741.600
-      @exponentsDemo[[5, 3, 3, 3]] = 637  # => 37.044.000
-      @exponentsDemo[[1, 7, 2, 3]] = 638  # => 37.507.050
-      @exponentsDemo[[6, 3, 5, 1]] = 639  # => 37.800.000
-      @exponentsDemo[[7, 5, 2, 2]] = 640  # => 38.102.400
-      @exponentsDemo[[2, 7, 4, 1]] = 641  # => 38.272.500
-      @exponentsDemo[[2, 2, 5, 3]] = 642  # => 38.587.500
-      @exponentsDemo[[3, 4, 2, 4]] = 643  # => 38.896.200
-      @exponentsDemo[[9, 7, 1, 1]] = 644  # => 39.191.040
-      @exponentsDemo[[9, 2, 2, 3]] = 645  # => 39.513.600
-      @exponentsDemo[[4, 4, 4, 2]] = 646  # => 39.690.000
-      @exponentsDemo[[5, 6, 1, 3]] = 647  # => 40.007.520
-      @exponentsDemo[[6, 6, 3, 1]] = 648  # => 40.824.000
-      @exponentsDemo[[6, 1, 4, 3]] = 649  # => 41.160.000
-      @exponentsDemo[[7, 3, 1, 4]] = 650  # => 41.489.280
-      @exponentsDemo[[2, 5, 3, 3]] = 651  # => 41.674.500
-      @exponentsDemo[[8, 3, 3, 2]] = 652  # => 42.336.000
-      @exponentsDemo[[3, 5, 5, 1]] = 653  # => 42.525.000
-      @exponentsDemo[[4, 7, 2, 2]] = 654  # => 42.865.200
-      @exponentsDemo[[4, 2, 3, 4]] = 655  # => 43.218.000
-      @exponentsDemo[[5, 2, 5, 2]] = 656  # => 44.100.000
-      @exponentsDemo[[6, 4, 2, 3]] = 657  # => 44.452.800
-      @exponentsDemo[[1, 6, 4, 2]] = 658  # => 44.651.250
-      @exponentsDemo[[2, 8, 1, 3]] = 659  # => 45.008.460
-      @exponentsDemo[[1, 1, 5, 4]] = 660  # => 45.018.750
-      @exponentsDemo[[7, 4, 4, 1]] = 661  # => 45.360.000
-      @exponentsDemo[[8, 6, 1, 2]] = 662  # => 45.722.880
-      @exponentsDemo[[3, 8, 3, 1]] = 663  # => 45.927.000
-      @exponentsDemo[[8, 1, 2, 4]] = 664  # => 46.099.200
-      @exponentsDemo[[3, 3, 4, 3]] = 665  # => 46.305.000
-      @exponentsDemo[[4, 5, 1, 4]] = 666  # => 46.675.440
-      @exponentsDemo[[9, 1, 4, 2]] = 667  # => 47.040.000
-      @exponentsDemo[[5, 5, 3, 2]] = 668  # => 47.628.000
-      @exponentsDemo[[1, 4, 3, 4]] = 669  # => 48.620.250
-      @exponentsDemo[[7, 7, 2, 1]] = 670  # => 48.988.800
-      @exponentsDemo[[7, 2, 3, 3]] = 671  # => 49.392.000
-      @exponentsDemo[[2, 4, 5, 2]] = 672  # => 49.612.500
-      @exponentsDemo[[3, 6, 2, 3]] = 673  # => 50.009.400
-      @exponentsDemo[[8, 2, 5, 1]] = 674  # => 50.400.000
-      @exponentsDemo[[9, 4, 2, 2]] = 675  # => 50.803.200
-      @exponentsDemo[[4, 6, 4, 1]] = 676  # => 51.030.000
-      @exponentsDemo[[5, 8, 1, 2]] = 677  # => 51.438.240
-      @exponentsDemo[[4, 1, 5, 3]] = 678  # => 51.450.000
-      @exponentsDemo[[5, 3, 2, 4]] = 679  # => 51.861.600
-      @exponentsDemo[[1, 7, 1, 4]] = 680  # => 52.509.870
-      @exponentsDemo[[6, 3, 4, 2]] = 681  # => 52.920.000
-      @exponentsDemo[[7, 5, 1, 3]] = 682  # => 53.343.360
-      @exponentsDemo[[2, 7, 3, 2]] = 683  # => 53.581.500
-      @exponentsDemo[[2, 2, 4, 4]] = 684  # => 54.022.500
-      @exponentsDemo[[8, 5, 3, 1]] = 685  # => 54.432.000
-      @exponentsDemo[[9, 2, 1, 4]] = 686  # => 55.319.040
-      @exponentsDemo[[4, 4, 3, 3]] = 687  # => 55.566.000
-      @exponentsDemo[[5, 4, 5, 1]] = 688  # => 56.700.000
-      @exponentsDemo[[6, 6, 2, 2]] = 689  # => 57.153.600
-      @exponentsDemo[[1, 8, 4, 1]] = 690  # => 57.408.750
-      @exponentsDemo[[6, 1, 3, 4]] = 691  # => 57.624.000
-      @exponentsDemo[[1, 3, 5, 3]] = 692  # => 57.881.250
-      @exponentsDemo[[2, 5, 2, 4]] = 693  # => 58.344.300
-      @exponentsDemo[[8, 8, 1, 1]] = 694  # => 58.786.560
-      @exponentsDemo[[7, 1, 5, 2]] = 695  # => 58.800.000
-      @exponentsDemo[[8, 3, 2, 3]] = 696  # => 59.270.400
-      @exponentsDemo[[3, 5, 4, 2]] = 697  # => 59.535.000
-      @exponentsDemo[[4, 7, 1, 3]] = 698  # => 60.011.280
-      @exponentsDemo[[9, 3, 4, 1]] = 699  # => 60.480.000
-      @exponentsDemo[[5, 7, 3, 1]] = 700  # => 61.236.000
-      @exponentsDemo[[5, 2, 4, 3]] = 701  # => 61.740.000
-      @exponentsDemo[[6, 4, 1, 4]] = 702  # => 62.233.920
-      @exponentsDemo[[1, 6, 3, 3]] = 703  # => 62.511.750
-      @exponentsDemo[[7, 4, 3, 2]] = 704  # => 63.504.000
-      @exponentsDemo[[2, 6, 5, 1]] = 705  # => 63.787.500
-      @exponentsDemo[[3, 8, 2, 2]] = 706  # => 64.297.800
-      @exponentsDemo[[3, 3, 3, 4]] = 707  # => 64.827.000
-      @exponentsDemo[[9, 6, 2, 1]] = 708  # => 65.318.400
-      @exponentsDemo[[9, 1, 3, 3]] = 709  # => 65.856.000
-      @exponentsDemo[[4, 3, 5, 2]] = 710  # => 66.150.000
-      @exponentsDemo[[5, 5, 2, 3]] = 711  # => 66.679.200
-      @exponentsDemo[[6, 5, 4, 1]] = 712  # => 68.040.000
-      @exponentsDemo[[7, 7, 1, 2]] = 713  # => 68.584.320
-      @exponentsDemo[[7, 2, 2, 4]] = 714  # => 69.148.800
-      @exponentsDemo[[2, 4, 4, 3]] = 715  # => 69.457.500
-      @exponentsDemo[[3, 6, 1, 4]] = 716  # => 70.013.160
-      @exponentsDemo[[8, 2, 4, 2]] = 717  # => 70.560.000
-      @exponentsDemo[[9, 4, 1, 3]] = 718  # => 71.124.480
-      @exponentsDemo[[4, 6, 3, 2]] = 719  # => 71.442.000
-      @exponentsDemo[[4, 1, 4, 4]] = 720  # => 72.030.000
-      @exponentsDemo[[6, 8, 2, 1]] = 721  # => 73.483.200
-      @exponentsDemo[[6, 3, 3, 3]] = 722  # => 74.088.000
-      @exponentsDemo[[1, 5, 5, 2]] = 723  # => 74.418.750
-      @exponentsDemo[[2, 7, 2, 3]] = 724  # => 75.014.100
-      @exponentsDemo[[7, 3, 5, 1]] = 725  # => 75.600.000
-      @exponentsDemo[[8, 5, 2, 2]] = 726  # => 76.204.800
-      @exponentsDemo[[3, 7, 4, 1]] = 727  # => 76.545.000
-      @exponentsDemo[[3, 2, 5, 3]] = 728  # => 77.175.000
-      @exponentsDemo[[4, 4, 2, 4]] = 729  # => 77.792.400
-      @exponentsDemo[[5, 4, 4, 2]] = 730  # => 79.380.000
+      @exponentsDemo[[8, 4, 2, 2]] = 590  # => 25.401.600 # ==> MID
+      @exponentsDemo[[3, 6, 4, 1]] = 591  # => 25.515.000 # ==> MID
+      @exponentsDemo[[4, 8, 1, 2]] = 592  # => 25.719.120 # ==> MID
+      @exponentsDemo[[3, 1, 5, 3]] = 593  # => 25.725.000 # ==> MID
+      @exponentsDemo[[4, 3, 2, 4]] = 594  # => 25.930.800 # ==> MID
+      @exponentsDemo[[5, 3, 4, 2]] = 595  # => 26.460.000 # ==> MID
+      @exponentsDemo[[6, 5, 1, 3]] = 596  # => 26.671.680 # ==> MID
+      @exponentsDemo[[1, 7, 3, 2]] = 597  # => 26.790.750 # ==> MID
+      @exponentsDemo[[1, 2, 4, 4]] = 598  # => 27.011.250 # ==> MID
+      @exponentsDemo[[7, 5, 3, 1]] = 599  # => 27.216.000 # ==> MID
+      @exponentsDemo[[8, 2, 1, 4]] = 600  # => 27.659.520 # ==> MID
+      @exponentsDemo[[3, 4, 3, 3]] = 601  # => 27.783.000 # ==> MID
+      @exponentsDemo[[9, 2, 3, 2]] = 602  # => 28.224.000 # ==> MID
+      @exponentsDemo[[4, 4, 5, 1]] = 603  # => 28.350.000 # ==> MID
+      @exponentsDemo[[5, 6, 2, 2]] = 604  # => 28.576.800 # ==> MID
+      @exponentsDemo[[5, 1, 3, 4]] = 605  # => 28.812.000 # ==> MID
+      @exponentsDemo[[1, 5, 2, 4]] = 606  # => 29.172.150 # ==> MID
+      @exponentsDemo[[7, 8, 1, 1]] = 607  # => 29.393.280 # ==> MID
+      @exponentsDemo[[6, 1, 5, 2]] = 608  # => 29.400.000 # ==> MID
+      @exponentsDemo[[7, 3, 2, 3]] = 609  # => 29.635.200 # ==> MID
+      @exponentsDemo[[2, 5, 4, 2]] = 610  # => 29.767.500 # ==> MID
+      @exponentsDemo[[3, 7, 1, 3]] = 611  # => 30.005.640 # ==> MID
+      @exponentsDemo[[8, 3, 4, 1]] = 612  # => 30.240.000 # ==> MID
+      @exponentsDemo[[9, 5, 1, 2]] = 613  # => 30.481.920 # ==> MID
+      @exponentsDemo[[4, 7, 3, 1]] = 614  # => 30.618.000 # ==> MID
+      @exponentsDemo[[4, 2, 4, 3]] = 615  # => 30.870.000 # ==> MID
+      @exponentsDemo[[5, 4, 1, 4]] = 616  # => 31.116.960 # ==> MID
+      @exponentsDemo[[6, 4, 3, 2]] = 617  # => 31.752.000 # ==> MID
+      @exponentsDemo[[1, 6, 5, 1]] = 618  # => 31.893.750 # ==> MID
+      @exponentsDemo[[2, 8, 2, 2]] = 619  # => 32.148.900 # ==> MID
+      @exponentsDemo[[2, 3, 3, 4]] = 620  # => 32.413.500 # ==> MID
+      @exponentsDemo[[8, 6, 2, 1]] = 621  # => 32.659.200 # ==> MID
+      @exponentsDemo[[8, 1, 3, 3]] = 622  # => 32.928.000 # ==> MID
+      @exponentsDemo[[3, 3, 5, 2]] = 623  # => 33.075.000 # ==> MID
+      @exponentsDemo[[4, 5, 2, 3]] = 624  # => 33.339.600 # ==> MID
+      @exponentsDemo[[9, 1, 5, 1]] = 625  # => 33.600.000 # ==> MID
+      @exponentsDemo[[5, 5, 4, 1]] = 626  # => 34.020.000 # ==> MID
+      @exponentsDemo[[6, 7, 1, 2]] = 627  # => 34.292.160 # ==> MID
+      @exponentsDemo[[6, 2, 2, 4]] = 628  # => 34.574.400 # ==> MID
+      @exponentsDemo[[1, 4, 4, 3]] = 629  # => 34.728.750 # ==> MID
+      @exponentsDemo[[2, 6, 1, 4]] = 630  # => 35.006.580 # ==> MID
+      @exponentsDemo[[7, 2, 4, 2]] = 631  # => 35.280.000 # ==> MID
+      @exponentsDemo[[8, 4, 1, 3]] = 632  # => 35.562.240 # ==> MID
+      @exponentsDemo[[3, 6, 3, 2]] = 633  # => 35.721.000 # ==> MID
+      @exponentsDemo[[3, 1, 4, 4]] = 634  # => 36.015.000 # ==> MID
+      @exponentsDemo[[9, 4, 3, 1]] = 635  # => 36.288.000 # ==> MID
+      @exponentsDemo[[5, 8, 2, 1]] = 636  # => 36.741.600 # ==> MID
+      @exponentsDemo[[5, 3, 3, 3]] = 637  # => 37.044.000 # ==> MID
+      @exponentsDemo[[1, 7, 2, 3]] = 638  # => 37.507.050 # ==> MID
+      @exponentsDemo[[6, 3, 5, 1]] = 639  # => 37.800.000 # ==> MID
+      @exponentsDemo[[7, 5, 2, 2]] = 640  # => 38.102.400 # ==> MID
+      @exponentsDemo[[2, 7, 4, 1]] = 641  # => 38.272.500 # ==> MID
+      @exponentsDemo[[2, 2, 5, 3]] = 642  # => 38.587.500 # ==> MID
+      @exponentsDemo[[3, 4, 2, 4]] = 643  # => 38.896.200 # ==> MID
+      @exponentsDemo[[9, 7, 1, 1]] = 644  # => 39.191.040 # ==> MID
+      @exponentsDemo[[9, 2, 2, 3]] = 645  # => 39.513.600 # ==> MID
+      @exponentsDemo[[4, 4, 4, 2]] = 646  # => 39.690.000 # ==> MID
+      @exponentsDemo[[5, 6, 1, 3]] = 647  # => 40.007.520 # ==> MID
+      @exponentsDemo[[6, 6, 3, 1]] = 648  # => 40.824.000 # ==> MID
+      @exponentsDemo[[6, 1, 4, 3]] = 649  # => 41.160.000 # ==> MID
+      @exponentsDemo[[7, 3, 1, 4]] = 650  # => 41.489.280 # ==> MID
+      @exponentsDemo[[2, 5, 3, 3]] = 651  # => 41.674.500 # ==> MID
+      @exponentsDemo[[8, 3, 3, 2]] = 652  # => 42.336.000 # ==> MID
+      @exponentsDemo[[3, 5, 5, 1]] = 653  # => 42.525.000 # ==> MID
+      @exponentsDemo[[4, 7, 2, 2]] = 654  # => 42.865.200 # ==> MID
+      @exponentsDemo[[4, 2, 3, 4]] = 655  # => 43.218.000 # ==> MID
+      @exponentsDemo[[5, 2, 5, 2]] = 656  # => 44.100.000 # ==> MID
+      @exponentsDemo[[6, 4, 2, 3]] = 657  # => 44.452.800 # ==> MID
+      @exponentsDemo[[1, 6, 4, 2]] = 658  # => 44.651.250 # ==> MID
+      @exponentsDemo[[2, 8, 1, 3]] = 659  # => 45.008.460 # ==> MID
+      @exponentsDemo[[1, 1, 5, 4]] = 660  # => 45.018.750 # ==> MID
+      @exponentsDemo[[7, 4, 4, 1]] = 661  # => 45.360.000 # ==> MID
+      @exponentsDemo[[8, 6, 1, 2]] = 662  # => 45.722.880 # ==> MID
+      @exponentsDemo[[3, 8, 3, 1]] = 663  # => 45.927.000 # ==> MID
+      @exponentsDemo[[8, 1, 2, 4]] = 664  # => 46.099.200 # ==> MID
+      @exponentsDemo[[3, 3, 4, 3]] = 665  # => 46.305.000 # ==> MID
+      @exponentsDemo[[4, 5, 1, 4]] = 666  # => 46.675.440 # ==> MID
+      @exponentsDemo[[9, 1, 4, 2]] = 667  # => 47.040.000 # ==> MID
+      @exponentsDemo[[5, 5, 3, 2]] = 668  # => 47.628.000 # ==> MID
+      @exponentsDemo[[1, 4, 3, 4]] = 669  # => 48.620.250 # ==> MID
+      @exponentsDemo[[7, 7, 2, 1]] = 670  # => 48.988.800 # ==> MID
+      @exponentsDemo[[7, 2, 3, 3]] = 671  # => 49.392.000 # ==> MID
+      @exponentsDemo[[2, 4, 5, 2]] = 672  # => 49.612.500 # ==> MID
+      @exponentsDemo[[3, 6, 2, 3]] = 673  # => 50.009.400 # ==> MID
+      @exponentsDemo[[8, 2, 5, 1]] = 674  # => 50.400.000 # ==> MID
+      @exponentsDemo[[9, 4, 2, 2]] = 675  # => 50.803.200 # ==> MID
+      @exponentsDemo[[4, 6, 4, 1]] = 676  # => 51.030.000 # ==> MID
+      @exponentsDemo[[5, 8, 1, 2]] = 677  # => 51.438.240 # ==> MID
+      @exponentsDemo[[4, 1, 5, 3]] = 678  # => 51.450.000 # ==> MID
+      @exponentsDemo[[5, 3, 2, 4]] = 679  # => 51.861.600 # ==> MID
+      @exponentsDemo[[1, 7, 1, 4]] = 680  # => 52.509.870 # ==> MID
+      @exponentsDemo[[6, 3, 4, 2]] = 681  # => 52.920.000 # ==> MID
+      @exponentsDemo[[7, 5, 1, 3]] = 682  # => 53.343.360 # ==> MID
+      @exponentsDemo[[2, 7, 3, 2]] = 683  # => 53.581.500 # ==> MID
+      @exponentsDemo[[2, 2, 4, 4]] = 684  # => 54.022.500 # ==> MID
+      @exponentsDemo[[8, 5, 3, 1]] = 685  # => 54.432.000 # ==> MID
+      @exponentsDemo[[9, 2, 1, 4]] = 686  # => 55.319.040 # ==> MID
+      @exponentsDemo[[4, 4, 3, 3]] = 687  # => 55.566.000 # ==> MID
+      @exponentsDemo[[5, 4, 5, 1]] = 688  # => 56.700.000 # ==> MID
+      @exponentsDemo[[6, 6, 2, 2]] = 689  # => 57.153.600 # ==> MID
+      @exponentsDemo[[1, 8, 4, 1]] = 690  # => 57.408.750 # ==> MID
+      @exponentsDemo[[6, 1, 3, 4]] = 691  # => 57.624.000 # ==> MID
+      @exponentsDemo[[1, 3, 5, 3]] = 692  # => 57.881.250 # ==> MID
+      @exponentsDemo[[2, 5, 2, 4]] = 693  # => 58.344.300 # ==> MID
+      @exponentsDemo[[8, 8, 1, 1]] = 694  # => 58.786.560 # ==> MID
+      @exponentsDemo[[7, 1, 5, 2]] = 695  # => 58.800.000 # ==> MID
+      @exponentsDemo[[8, 3, 2, 3]] = 696  # => 59.270.400 # ==> MID
+      @exponentsDemo[[3, 5, 4, 2]] = 697  # => 59.535.000 # ==> MID
+      @exponentsDemo[[4, 7, 1, 3]] = 698  # => 60.011.280 # ==> MID
+      @exponentsDemo[[9, 3, 4, 1]] = 699  # => 60.480.000 # ==> MID
+      @exponentsDemo[[5, 7, 3, 1]] = 700  # => 61.236.000 # ==> MID
+      @exponentsDemo[[5, 2, 4, 3]] = 701  # => 61.740.000 # ==> MID
+      @exponentsDemo[[6, 4, 1, 4]] = 702  # => 62.233.920 # ==> MID
+      @exponentsDemo[[1, 6, 3, 3]] = 703  # => 62.511.750 # ==> MID
+      @exponentsDemo[[7, 4, 3, 2]] = 704  # => 63.504.000 # ==> MID
+      @exponentsDemo[[2, 6, 5, 1]] = 705  # => 63.787.500 # ==> MID
+      @exponentsDemo[[3, 8, 2, 2]] = 706  # => 64.297.800 # ==> MID
+      @exponentsDemo[[3, 3, 3, 4]] = 707  # => 64.827.000 # ==> MID
+      @exponentsDemo[[9, 6, 2, 1]] = 708  # => 65.318.400 # ==> MID
+      @exponentsDemo[[9, 1, 3, 3]] = 709  # => 65.856.000 # ==> MID
+      @exponentsDemo[[4, 3, 5, 2]] = 710  # => 66.150.000 # ==> MID
+      @exponentsDemo[[5, 5, 2, 3]] = 711  # => 66.679.200 # ==> MID
+      @exponentsDemo[[6, 5, 4, 1]] = 712  # => 68.040.000 # ==> MID
+      @exponentsDemo[[7, 7, 1, 2]] = 713  # => 68.584.320 # ==> MID
+      @exponentsDemo[[7, 2, 2, 4]] = 714  # => 69.148.800 # ==> MID
+      @exponentsDemo[[2, 4, 4, 3]] = 715  # => 69.457.500 # ==> MID
+      @exponentsDemo[[3, 6, 1, 4]] = 716  # => 70.013.160 # ==> MID
+      @exponentsDemo[[8, 2, 4, 2]] = 717  # => 70.560.000 # ==> MID
+      @exponentsDemo[[9, 4, 1, 3]] = 718  # => 71.124.480 # ==> MID
+      @exponentsDemo[[4, 6, 3, 2]] = 719  # => 71.442.000 # ==> MID
+      @exponentsDemo[[4, 1, 4, 4]] = 720  # => 72.030.000 # ==> MID
+      @exponentsDemo[[6, 8, 2, 1]] = 721  # => 73.483.200 # ==> MID
+      @exponentsDemo[[6, 3, 3, 3]] = 722  # => 74.088.000 # ==> MID
+      @exponentsDemo[[1, 5, 5, 2]] = 723  # => 74.418.750 # ==> MID
+      @exponentsDemo[[2, 7, 2, 3]] = 724  # => 75.014.100 # ==> MID
+      @exponentsDemo[[7, 3, 5, 1]] = 725  # => 75.600.000 # ==> MID
+      @exponentsDemo[[8, 5, 2, 2]] = 726  # => 76.204.800 # ==> MID
+      @exponentsDemo[[3, 7, 4, 1]] = 727  # => 76.545.000 # ==> MID
+      @exponentsDemo[[3, 2, 5, 3]] = 728  # => 77.175.000 # ==> MID
+      @exponentsDemo[[4, 4, 2, 4]] = 729  # => 77.792.400 # ==> MID
+      @exponentsDemo[[5, 4, 4, 2]] = 730  # => 79.380.000 # ==> MID
       @exponentsDemo[[6, 6, 1, 3]] = 731  # => 80.015.040
       @exponentsDemo[[1, 8, 3, 2]] = 732  # => 80.372.250
       @exponentsDemo[[1, 3, 4, 4]] = 733  # => 81.033.750
@@ -1009,156 +978,156 @@ class Parameters_Extended
       @exponentsDemo[[6, 6, 4, 1]] = 847  # => 204.120.000
       @exponentsDemo[[7, 8, 1, 2]] = 848  # => 205.752.960
       @exponentsDemo[[6, 1, 5, 3]] = 849  # => 205.800.000
-      @exponentsDemo[[7, 3, 2, 4]] = 850  # => 207.446.400
-      @exponentsDemo[[2, 5, 4, 3]] = 851  # => 208.372.500
-      @exponentsDemo[[3, 7, 1, 4]] = 852  # => 210.039.480
-      @exponentsDemo[[8, 3, 4, 2]] = 853  # => 211.680.000
-      @exponentsDemo[[9, 5, 1, 3]] = 854  # => 213.373.440
-      @exponentsDemo[[4, 7, 3, 2]] = 855  # => 214.326.000
-      @exponentsDemo[[4, 2, 4, 4]] = 856  # => 216.090.000
-      @exponentsDemo[[6, 4, 3, 3]] = 857  # => 222.264.000
-      @exponentsDemo[[1, 6, 5, 2]] = 858  # => 223.256.250
-      @exponentsDemo[[2, 8, 2, 3]] = 859  # => 225.042.300
-      @exponentsDemo[[7, 4, 5, 1]] = 860  # => 226.800.000
-      @exponentsDemo[[8, 6, 2, 2]] = 861  # => 228.614.400
-      @exponentsDemo[[3, 8, 4, 1]] = 862  # => 229.635.000
-      @exponentsDemo[[8, 1, 3, 4]] = 863  # => 230.496.000
-      @exponentsDemo[[3, 3, 5, 3]] = 864  # => 231.525.000
-      @exponentsDemo[[4, 5, 2, 4]] = 865  # => 233.377.200
-      @exponentsDemo[[9, 1, 5, 2]] = 866  # => 235.200.000
-      @exponentsDemo[[5, 5, 4, 2]] = 867  # => 238.140.000
-      @exponentsDemo[[6, 7, 1, 3]] = 868  # => 240.045.120
-      @exponentsDemo[[1, 4, 4, 4]] = 869  # => 243.101.250
-      @exponentsDemo[[7, 7, 3, 1]] = 870  # => 244.944.000
-      @exponentsDemo[[7, 2, 4, 3]] = 871  # => 246.960.000
-      @exponentsDemo[[8, 4, 1, 4]] = 872  # => 248.935.680
-      @exponentsDemo[[3, 6, 3, 3]] = 873  # => 250.047.000
-      @exponentsDemo[[9, 4, 3, 2]] = 874  # => 254.016.000
-      @exponentsDemo[[4, 6, 5, 1]] = 875  # => 255.150.000
-      @exponentsDemo[[5, 8, 2, 2]] = 876  # => 257.191.200
-      @exponentsDemo[[5, 3, 3, 4]] = 877  # => 259.308.000
-      @exponentsDemo[[1, 7, 2, 4]] = 878  # => 262.549.350
-      @exponentsDemo[[6, 3, 5, 2]] = 879  # => 264.600.000
-      @exponentsDemo[[7, 5, 2, 3]] = 880  # => 266.716.800
-      @exponentsDemo[[2, 7, 4, 2]] = 881  # => 267.907.500
-      @exponentsDemo[[2, 2, 5, 4]] = 882  # => 270.112.500
-      @exponentsDemo[[8, 5, 4, 1]] = 883  # => 272.160.000
-      @exponentsDemo[[9, 7, 1, 2]] = 884  # => 274.337.280
-      @exponentsDemo[[9, 2, 2, 4]] = 885  # => 276.595.200
-      @exponentsDemo[[4, 4, 4, 3]] = 886  # => 277.830.000
-      @exponentsDemo[[5, 6, 1, 4]] = 887  # => 280.052.640
-      @exponentsDemo[[6, 6, 3, 2]] = 888  # => 285.768.000
-      @exponentsDemo[[1, 8, 5, 1]] = 889  # => 287.043.750
-      @exponentsDemo[[6, 1, 4, 4]] = 890  # => 288.120.000
-      @exponentsDemo[[2, 5, 3, 4]] = 891  # => 291.721.500
-      @exponentsDemo[[8, 8, 2, 1]] = 892  # => 293.932.800
-      @exponentsDemo[[8, 3, 3, 3]] = 893  # => 296.352.000
-      @exponentsDemo[[3, 5, 5, 2]] = 894  # => 297.675.000
-      @exponentsDemo[[4, 7, 2, 3]] = 895  # => 300.056.400
-      @exponentsDemo[[9, 3, 5, 1]] = 896  # => 302.400.000
-      @exponentsDemo[[5, 7, 4, 1]] = 897  # => 306.180.000
-      @exponentsDemo[[5, 2, 5, 3]] = 898  # => 308.700.000
-      @exponentsDemo[[6, 4, 2, 4]] = 899  # => 311.169.600
-      @exponentsDemo[[1, 6, 4, 3]] = 900  # => 312.558.750
-      @exponentsDemo[[2, 8, 1, 4]] = 901  # => 315.059.220
-      @exponentsDemo[[7, 4, 4, 2]] = 902  # => 317.520.000
-      @exponentsDemo[[8, 6, 1, 3]] = 903  # => 320.060.160
-      @exponentsDemo[[3, 8, 3, 2]] = 904  # => 321.489.000
-      @exponentsDemo[[3, 3, 4, 4]] = 905  # => 324.135.000
-      @exponentsDemo[[9, 6, 3, 1]] = 906  # => 326.592.000
-      @exponentsDemo[[9, 1, 4, 3]] = 907  # => 329.280.000
-      @exponentsDemo[[5, 5, 3, 3]] = 908  # => 333.396.000
-      @exponentsDemo[[6, 5, 5, 1]] = 909  # => 340.200.000
-      @exponentsDemo[[7, 7, 2, 2]] = 910  # => 342.921.600
-      @exponentsDemo[[7, 2, 3, 4]] = 911  # => 345.744.000
-      @exponentsDemo[[2, 4, 5, 3]] = 912  # => 347.287.500
-      @exponentsDemo[[3, 6, 2, 4]] = 913  # => 350.065.800
-      @exponentsDemo[[8, 2, 5, 2]] = 914  # => 352.800.000
-      @exponentsDemo[[9, 4, 2, 3]] = 915  # => 355.622.400
-      @exponentsDemo[[4, 6, 4, 2]] = 916  # => 357.210.000
-      @exponentsDemo[[5, 8, 1, 3]] = 917  # => 360.067.680
-      @exponentsDemo[[4, 1, 5, 4]] = 918  # => 360.150.000
-      @exponentsDemo[[6, 8, 3, 1]] = 919  # => 367.416.000
-      @exponentsDemo[[6, 3, 4, 3]] = 920  # => 370.440.000
-      @exponentsDemo[[7, 5, 1, 4]] = 921  # => 373.403.520
-      @exponentsDemo[[2, 7, 3, 3]] = 922  # => 375.070.500
-      @exponentsDemo[[8, 5, 3, 2]] = 923  # => 381.024.000
-      @exponentsDemo[[3, 7, 5, 1]] = 924  # => 382.725.000
-      @exponentsDemo[[4, 4, 3, 4]] = 925  # => 388.962.000
-      @exponentsDemo[[5, 4, 5, 2]] = 926  # => 396.900.000
-      @exponentsDemo[[6, 6, 2, 3]] = 927  # => 400.075.200
-      @exponentsDemo[[1, 8, 4, 2]] = 928  # => 401.861.250
-      @exponentsDemo[[1, 3, 5, 4]] = 929  # => 405.168.750
-      @exponentsDemo[[7, 6, 4, 1]] = 930  # => 408.240.000
-      @exponentsDemo[[8, 8, 1, 2]] = 931  # => 411.505.920
-      @exponentsDemo[[7, 1, 5, 3]] = 932  # => 411.600.000
-      @exponentsDemo[[8, 3, 2, 4]] = 933  # => 414.892.800
-      @exponentsDemo[[3, 5, 4, 3]] = 934  # => 416.745.000
-      @exponentsDemo[[4, 7, 1, 4]] = 935  # => 420.078.960
-      @exponentsDemo[[9, 3, 4, 2]] = 936  # => 423.360.000
-      @exponentsDemo[[5, 7, 3, 2]] = 937  # => 428.652.000
-      @exponentsDemo[[5, 2, 4, 4]] = 938  # => 432.180.000
-      @exponentsDemo[[1, 6, 3, 4]] = 939  # => 437.582.250
-      @exponentsDemo[[7, 4, 3, 3]] = 940  # => 444.528.000
-      @exponentsDemo[[2, 6, 5, 2]] = 941  # => 446.512.500
-      @exponentsDemo[[3, 8, 2, 3]] = 942  # => 450.084.600
-      @exponentsDemo[[8, 4, 5, 1]] = 943  # => 453.600.000
-      @exponentsDemo[[9, 6, 2, 2]] = 944  # => 457.228.800
-      @exponentsDemo[[4, 8, 4, 1]] = 945  # => 459.270.000
-      @exponentsDemo[[9, 1, 3, 4]] = 946  # => 460.992.000
-      @exponentsDemo[[4, 3, 5, 3]] = 947  # => 463.050.000
-      @exponentsDemo[[5, 5, 2, 4]] = 948  # => 466.754.400
-      @exponentsDemo[[6, 5, 4, 2]] = 949  # => 476.280.000
-      @exponentsDemo[[7, 7, 1, 3]] = 950  # => 480.090.240
-      @exponentsDemo[[2, 4, 4, 4]] = 951  # => 486.202.500
-      @exponentsDemo[[8, 7, 3, 1]] = 952  # => 489.888.000
-      @exponentsDemo[[8, 2, 4, 3]] = 953  # => 493.920.000
-      @exponentsDemo[[9, 4, 1, 4]] = 954  # => 497.871.360
-      @exponentsDemo[[4, 6, 3, 3]] = 955  # => 500.094.000
-      @exponentsDemo[[5, 6, 5, 1]] = 956  # => 510.300.000
-      @exponentsDemo[[6, 8, 2, 2]] = 957  # => 514.382.400
-      @exponentsDemo[[6, 3, 3, 4]] = 958  # => 518.616.000
-      @exponentsDemo[[1, 5, 5, 3]] = 959  # => 520.931.250
-      @exponentsDemo[[2, 7, 2, 4]] = 960  # => 525.098.700
-      @exponentsDemo[[7, 3, 5, 2]] = 961  # => 529.200.000
-      @exponentsDemo[[8, 5, 2, 3]] = 962  # => 533.433.600
-      @exponentsDemo[[3, 7, 4, 2]] = 963  # => 535.815.000
-      @exponentsDemo[[3, 2, 5, 4]] = 964  # => 540.225.000
-      @exponentsDemo[[9, 5, 4, 1]] = 965  # => 544.320.000
-      @exponentsDemo[[5, 4, 4, 3]] = 966  # => 555.660.000
-      @exponentsDemo[[6, 6, 1, 4]] = 967  # => 560.105.280
-      @exponentsDemo[[1, 8, 3, 3]] = 968  # => 562.605.750
-      @exponentsDemo[[7, 6, 3, 2]] = 969  # => 571.536.000
-      @exponentsDemo[[2, 8, 5, 1]] = 970  # => 574.087.500
-      @exponentsDemo[[7, 1, 4, 4]] = 971  # => 576.240.000
-      @exponentsDemo[[3, 5, 3, 4]] = 972  # => 583.443.000
-      @exponentsDemo[[9, 8, 2, 1]] = 973  # => 587.865.600
-      @exponentsDemo[[9, 3, 3, 3]] = 974  # => 592.704.000
-      @exponentsDemo[[4, 5, 5, 2]] = 975  # => 595.350.000
-      @exponentsDemo[[5, 7, 2, 3]] = 976  # => 600.112.800
-      @exponentsDemo[[6, 7, 4, 1]] = 977  # => 612.360.000
-      @exponentsDemo[[6, 2, 5, 3]] = 978  # => 617.400.000
-      @exponentsDemo[[7, 4, 2, 4]] = 979  # => 622.339.200
-      @exponentsDemo[[2, 6, 4, 3]] = 980  # => 625.117.500
-      @exponentsDemo[[3, 8, 1, 4]] = 981  # => 630.118.440
-      @exponentsDemo[[8, 4, 4, 2]] = 982  # => 635.040.000
-      @exponentsDemo[[9, 6, 1, 3]] = 983  # => 640.120.320
-      @exponentsDemo[[4, 8, 3, 2]] = 984  # => 642.978.000
-      @exponentsDemo[[4, 3, 4, 4]] = 985  # => 648.270.000
-      @exponentsDemo[[6, 5, 3, 3]] = 986  # => 666.792.000
-      @exponentsDemo[[1, 7, 5, 2]] = 987  # => 669.768.750
-      @exponentsDemo[[7, 5, 5, 1]] = 988  # => 680.400.000
-      @exponentsDemo[[8, 7, 2, 2]] = 989  # => 685.843.200
-      @exponentsDemo[[8, 2, 3, 4]] = 990  # => 691.488.000
-      @exponentsDemo[[3, 4, 5, 3]] = 991  # => 694.575.000
-      @exponentsDemo[[4, 6, 2, 4]] = 992  # => 700.131.600
-      @exponentsDemo[[9, 2, 5, 2]] = 993  # => 705.600.000
-      @exponentsDemo[[5, 6, 4, 2]] = 994  # => 714.420.000
-      @exponentsDemo[[6, 8, 1, 3]] = 995  # => 720.135.360
-      @exponentsDemo[[5, 1, 5, 4]] = 996  # => 720.300.000
-      @exponentsDemo[[1, 5, 4, 4]] = 997  # => 729.303.750
-      @exponentsDemo[[7, 8, 3, 1]] = 998  # => 734.832.000
-      @exponentsDemo[[7, 3, 4, 3]] = 999  # => 740.880.000
+      @exponentsDemo[[7, 3, 2, 4]] = 850  # => 207.446.400 # ==> LONG
+      @exponentsDemo[[2, 5, 4, 3]] = 851  # => 208.372.500 # ==> LONG
+      @exponentsDemo[[3, 7, 1, 4]] = 852  # => 210.039.480 # ==> LONG
+      @exponentsDemo[[8, 3, 4, 2]] = 853  # => 211.680.000 # ==> LONG
+      @exponentsDemo[[9, 5, 1, 3]] = 854  # => 213.373.440 # ==> LONG
+      @exponentsDemo[[4, 7, 3, 2]] = 855  # => 214.326.000 # ==> LONG
+      @exponentsDemo[[4, 2, 4, 4]] = 856  # => 216.090.000 # ==> LONG
+      @exponentsDemo[[6, 4, 3, 3]] = 857  # => 222.264.000 # ==> LONG
+      @exponentsDemo[[1, 6, 5, 2]] = 858  # => 223.256.250 # ==> LONG
+      @exponentsDemo[[2, 8, 2, 3]] = 859  # => 225.042.300 # ==> LONG
+      @exponentsDemo[[7, 4, 5, 1]] = 860  # => 226.800.000 # ==> LONG
+      @exponentsDemo[[8, 6, 2, 2]] = 861  # => 228.614.400 # ==> LONG
+      @exponentsDemo[[3, 8, 4, 1]] = 862  # => 229.635.000 # ==> LONG
+      @exponentsDemo[[8, 1, 3, 4]] = 863  # => 230.496.000 # ==> LONG
+      @exponentsDemo[[3, 3, 5, 3]] = 864  # => 231.525.000 # ==> LONG
+      @exponentsDemo[[4, 5, 2, 4]] = 865  # => 233.377.200 # ==> LONG
+      @exponentsDemo[[9, 1, 5, 2]] = 866  # => 235.200.000 # ==> LONG
+      @exponentsDemo[[5, 5, 4, 2]] = 867  # => 238.140.000 # ==> LONG
+      @exponentsDemo[[6, 7, 1, 3]] = 868  # => 240.045.120 # ==> LONG
+      @exponentsDemo[[1, 4, 4, 4]] = 869  # => 243.101.250 # ==> LONG
+      @exponentsDemo[[7, 7, 3, 1]] = 870  # => 244.944.000 # ==> LONG
+      @exponentsDemo[[7, 2, 4, 3]] = 871  # => 246.960.000 # ==> LONG
+      @exponentsDemo[[8, 4, 1, 4]] = 872  # => 248.935.680 # ==> LONG
+      @exponentsDemo[[3, 6, 3, 3]] = 873  # => 250.047.000 # ==> LONG
+      @exponentsDemo[[9, 4, 3, 2]] = 874  # => 254.016.000 # ==> LONG
+      @exponentsDemo[[4, 6, 5, 1]] = 875  # => 255.150.000 # ==> LONG
+      @exponentsDemo[[5, 8, 2, 2]] = 876  # => 257.191.200 # ==> LONG
+      @exponentsDemo[[5, 3, 3, 4]] = 877  # => 259.308.000 # ==> LONG
+      @exponentsDemo[[1, 7, 2, 4]] = 878  # => 262.549.350 # ==> LONG
+      @exponentsDemo[[6, 3, 5, 2]] = 879  # => 264.600.000 # ==> LONG
+      @exponentsDemo[[7, 5, 2, 3]] = 880  # => 266.716.800 # ==> LONG
+      @exponentsDemo[[2, 7, 4, 2]] = 881  # => 267.907.500 # ==> LONG
+      @exponentsDemo[[2, 2, 5, 4]] = 882  # => 270.112.500 # ==> LONG
+      @exponentsDemo[[8, 5, 4, 1]] = 883  # => 272.160.000 # ==> LONG
+      @exponentsDemo[[9, 7, 1, 2]] = 884  # => 274.337.280 # ==> LONG
+      @exponentsDemo[[9, 2, 2, 4]] = 885  # => 276.595.200 # ==> LONG
+      @exponentsDemo[[4, 4, 4, 3]] = 886  # => 277.830.000 # ==> LONG
+      @exponentsDemo[[5, 6, 1, 4]] = 887  # => 280.052.640 # ==> LONG
+      @exponentsDemo[[6, 6, 3, 2]] = 888  # => 285.768.000 # ==> LONG
+      @exponentsDemo[[1, 8, 5, 1]] = 889  # => 287.043.750 # ==> LONG
+      @exponentsDemo[[6, 1, 4, 4]] = 890  # => 288.120.000 # ==> LONG
+      @exponentsDemo[[2, 5, 3, 4]] = 891  # => 291.721.500 # ==> LONG
+      @exponentsDemo[[8, 8, 2, 1]] = 892  # => 293.932.800 # ==> LONG
+      @exponentsDemo[[8, 3, 3, 3]] = 893  # => 296.352.000 # ==> LONG
+      @exponentsDemo[[3, 5, 5, 2]] = 894  # => 297.675.000 # ==> LONG
+      @exponentsDemo[[4, 7, 2, 3]] = 895  # => 300.056.400 # ==> LONG
+      @exponentsDemo[[9, 3, 5, 1]] = 896  # => 302.400.000 # ==> LONG
+      @exponentsDemo[[5, 7, 4, 1]] = 897  # => 306.180.000 # ==> LONG
+      @exponentsDemo[[5, 2, 5, 3]] = 898  # => 308.700.000 # ==> LONG
+      @exponentsDemo[[6, 4, 2, 4]] = 899  # => 311.169.600 # ==> LONG
+      @exponentsDemo[[1, 6, 4, 3]] = 900  # => 312.558.750 # ==> LONG
+      @exponentsDemo[[2, 8, 1, 4]] = 901  # => 315.059.220 # ==> LONG
+      @exponentsDemo[[7, 4, 4, 2]] = 902  # => 317.520.000 # ==> LONG
+      @exponentsDemo[[8, 6, 1, 3]] = 903  # => 320.060.160 # ==> LONG
+      @exponentsDemo[[3, 8, 3, 2]] = 904  # => 321.489.000 # ==> LONG
+      @exponentsDemo[[3, 3, 4, 4]] = 905  # => 324.135.000 # ==> LONG
+      @exponentsDemo[[9, 6, 3, 1]] = 906  # => 326.592.000 # ==> LONG
+      @exponentsDemo[[9, 1, 4, 3]] = 907  # => 329.280.000 # ==> LONG
+      @exponentsDemo[[5, 5, 3, 3]] = 908  # => 333.396.000 # ==> LONG
+      @exponentsDemo[[6, 5, 5, 1]] = 909  # => 340.200.000 # ==> LONG
+      @exponentsDemo[[7, 7, 2, 2]] = 910  # => 342.921.600 # ==> LONG
+      @exponentsDemo[[7, 2, 3, 4]] = 911  # => 345.744.000 # ==> LONG
+      @exponentsDemo[[2, 4, 5, 3]] = 912  # => 347.287.500 # ==> LONG
+      @exponentsDemo[[3, 6, 2, 4]] = 913  # => 350.065.800 # ==> LONG
+      @exponentsDemo[[8, 2, 5, 2]] = 914  # => 352.800.000 # ==> LONG
+      @exponentsDemo[[9, 4, 2, 3]] = 915  # => 355.622.400 # ==> LONG
+      @exponentsDemo[[4, 6, 4, 2]] = 916  # => 357.210.000 # ==> LONG
+      @exponentsDemo[[5, 8, 1, 3]] = 917  # => 360.067.680 # ==> LONG
+      @exponentsDemo[[4, 1, 5, 4]] = 918  # => 360.150.000 # ==> LONG
+      @exponentsDemo[[6, 8, 3, 1]] = 919  # => 367.416.000 # ==> LONG
+      @exponentsDemo[[6, 3, 4, 3]] = 920  # => 370.440.000 # ==> LONG
+      @exponentsDemo[[7, 5, 1, 4]] = 921  # => 373.403.520 # ==> LONG
+      @exponentsDemo[[2, 7, 3, 3]] = 922  # => 375.070.500 # ==> LONG
+      @exponentsDemo[[8, 5, 3, 2]] = 923  # => 381.024.000 # ==> LONG
+      @exponentsDemo[[3, 7, 5, 1]] = 924  # => 382.725.000 # ==> LONG
+      @exponentsDemo[[4, 4, 3, 4]] = 925  # => 388.962.000 # ==> LONG
+      @exponentsDemo[[5, 4, 5, 2]] = 926  # => 396.900.000 # ==> LONG
+      @exponentsDemo[[6, 6, 2, 3]] = 927  # => 400.075.200 # ==> LONG
+      @exponentsDemo[[1, 8, 4, 2]] = 928  # => 401.861.250 # ==> LONG
+      @exponentsDemo[[1, 3, 5, 4]] = 929  # => 405.168.750 # ==> LONG
+      @exponentsDemo[[7, 6, 4, 1]] = 930  # => 408.240.000 # ==> LONG
+      @exponentsDemo[[8, 8, 1, 2]] = 931  # => 411.505.920 # ==> LONG
+      @exponentsDemo[[7, 1, 5, 3]] = 932  # => 411.600.000 # ==> LONG
+      @exponentsDemo[[8, 3, 2, 4]] = 933  # => 414.892.800 # ==> LONG
+      @exponentsDemo[[3, 5, 4, 3]] = 934  # => 416.745.000 # ==> LONG
+      @exponentsDemo[[4, 7, 1, 4]] = 935  # => 420.078.960 # ==> LONG
+      @exponentsDemo[[9, 3, 4, 2]] = 936  # => 423.360.000 # ==> LONG
+      @exponentsDemo[[5, 7, 3, 2]] = 937  # => 428.652.000 # ==> LONG
+      @exponentsDemo[[5, 2, 4, 4]] = 938  # => 432.180.000 # ==> LONG
+      @exponentsDemo[[1, 6, 3, 4]] = 939  # => 437.582.250 # ==> LONG
+      @exponentsDemo[[7, 4, 3, 3]] = 940  # => 444.528.000 # ==> LONG
+      @exponentsDemo[[2, 6, 5, 2]] = 941  # => 446.512.500 # ==> LONG
+      @exponentsDemo[[3, 8, 2, 3]] = 942  # => 450.084.600 # ==> LONG
+      @exponentsDemo[[8, 4, 5, 1]] = 943  # => 453.600.000 # ==> LONG
+      @exponentsDemo[[9, 6, 2, 2]] = 944  # => 457.228.800 # ==> LONG
+      @exponentsDemo[[4, 8, 4, 1]] = 945  # => 459.270.000 # ==> LONG
+      @exponentsDemo[[9, 1, 3, 4]] = 946  # => 460.992.000 # ==> LONG
+      @exponentsDemo[[4, 3, 5, 3]] = 947  # => 463.050.000 # ==> LONG
+      @exponentsDemo[[5, 5, 2, 4]] = 948  # => 466.754.400 # ==> LONG
+      @exponentsDemo[[6, 5, 4, 2]] = 949  # => 476.280.000 # ==> LONG
+      @exponentsDemo[[7, 7, 1, 3]] = 950  # => 480.090.240 # ==> LONG
+      @exponentsDemo[[2, 4, 4, 4]] = 951  # => 486.202.500 # ==> LONG
+      @exponentsDemo[[8, 7, 3, 1]] = 952  # => 489.888.000 # ==> LONG
+      @exponentsDemo[[8, 2, 4, 3]] = 953  # => 493.920.000 # ==> LONG
+      @exponentsDemo[[9, 4, 1, 4]] = 954  # => 497.871.360 # ==> LONG
+      @exponentsDemo[[4, 6, 3, 3]] = 955  # => 500.094.000 # ==> LONG
+      @exponentsDemo[[5, 6, 5, 1]] = 956  # => 510.300.000 # ==> LONG
+      @exponentsDemo[[6, 8, 2, 2]] = 957  # => 514.382.400 # ==> LONG
+      @exponentsDemo[[6, 3, 3, 4]] = 958  # => 518.616.000 # ==> LONG
+      @exponentsDemo[[1, 5, 5, 3]] = 959  # => 520.931.250 # ==> LONG
+      @exponentsDemo[[2, 7, 2, 4]] = 960  # => 525.098.700 # ==> LONG
+      @exponentsDemo[[7, 3, 5, 2]] = 961  # => 529.200.000 # ==> LONG
+      @exponentsDemo[[8, 5, 2, 3]] = 962  # => 533.433.600 # ==> LONG
+      @exponentsDemo[[3, 7, 4, 2]] = 963  # => 535.815.000 # ==> LONG
+      @exponentsDemo[[3, 2, 5, 4]] = 964  # => 540.225.000 # ==> LONG
+      @exponentsDemo[[9, 5, 4, 1]] = 965  # => 544.320.000 # ==> LONG
+      @exponentsDemo[[5, 4, 4, 3]] = 966  # => 555.660.000 # ==> LONG
+      @exponentsDemo[[6, 6, 1, 4]] = 967  # => 560.105.280 # ==> LONG
+      @exponentsDemo[[1, 8, 3, 3]] = 968  # => 562.605.750 # ==> LONG
+      @exponentsDemo[[7, 6, 3, 2]] = 969  # => 571.536.000 # ==> LONG
+      @exponentsDemo[[2, 8, 5, 1]] = 970  # => 574.087.500 # ==> LONG
+      @exponentsDemo[[7, 1, 4, 4]] = 971  # => 576.240.000 # ==> LONG
+      @exponentsDemo[[3, 5, 3, 4]] = 972  # => 583.443.000 # ==> LONG
+      @exponentsDemo[[9, 8, 2, 1]] = 973  # => 587.865.600 # ==> LONG
+      @exponentsDemo[[9, 3, 3, 3]] = 974  # => 592.704.000 # ==> LONG
+      @exponentsDemo[[4, 5, 5, 2]] = 975  # => 595.350.000 # ==> LONG
+      @exponentsDemo[[5, 7, 2, 3]] = 976  # => 600.112.800 # ==> LONG
+      @exponentsDemo[[6, 7, 4, 1]] = 977  # => 612.360.000 # ==> LONG
+      @exponentsDemo[[6, 2, 5, 3]] = 978  # => 617.400.000 # ==> LONG
+      @exponentsDemo[[7, 4, 2, 4]] = 979  # => 622.339.200 # ==> LONG
+      @exponentsDemo[[2, 6, 4, 3]] = 980  # => 625.117.500 # ==> LONG
+      @exponentsDemo[[3, 8, 1, 4]] = 981  # => 630.118.440 # ==> LONG
+      @exponentsDemo[[8, 4, 4, 2]] = 982  # => 635.040.000 # ==> LONG
+      @exponentsDemo[[9, 6, 1, 3]] = 983  # => 640.120.320 # ==> LONG
+      @exponentsDemo[[4, 8, 3, 2]] = 984  # => 642.978.000 # ==> LONG
+      @exponentsDemo[[4, 3, 4, 4]] = 985  # => 648.270.000 # ==> LONG
+      @exponentsDemo[[6, 5, 3, 3]] = 986  # => 666.792.000 # ==> LONG
+      @exponentsDemo[[1, 7, 5, 2]] = 987  # => 669.768.750 # ==> LONG
+      @exponentsDemo[[7, 5, 5, 1]] = 988  # => 680.400.000 # ==> LONG
+      @exponentsDemo[[8, 7, 2, 2]] = 989  # => 685.843.200 # ==> LONG
+      @exponentsDemo[[8, 2, 3, 4]] = 990  # => 691.488.000 # ==> LONG
+      @exponentsDemo[[3, 4, 5, 3]] = 991  # => 694.575.000 # ==> LONG
+      @exponentsDemo[[4, 6, 2, 4]] = 992  # => 700.131.600 # ==> LONG
+      @exponentsDemo[[9, 2, 5, 2]] = 993  # => 705.600.000 # ==> LONG
+      @exponentsDemo[[5, 6, 4, 2]] = 994  # => 714.420.000 # ==> LONG
+      @exponentsDemo[[6, 8, 1, 3]] = 995  # => 720.135.360 # ==> LONG
+      @exponentsDemo[[5, 1, 5, 4]] = 996  # => 720.300.000 # ==> LONG
+      @exponentsDemo[[1, 5, 4, 4]] = 997  # => 729.303.750 # ==> LONG
+      @exponentsDemo[[7, 8, 3, 1]] = 998  # => 734.832.000 # ==> LONG
+      @exponentsDemo[[7, 3, 4, 3]] = 999  # => 740.880.000 # ==> LONG
       @exponentsDemo[[8, 5, 1, 4]] = 1000  # => 746.807.040
       @exponentsDemo[[3, 7, 3, 3]] = 1001  # => 750.141.000
       @exponentsDemo[[9, 5, 3, 2]] = 1002  # => 762.048.000

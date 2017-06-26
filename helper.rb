@@ -5,6 +5,7 @@ class Helper
    def printHelp
       puts "Please use labels as explained:"
       puts ""
+      puts "-h: print this help"
       puts "-l xxx -d zzz -x yyy: test locally"
       puts "-lb xxx -d zzz -x yyy: test dfp locally with a single protected object"
       puts "-t xxx -d zzz -x yyy: peforms a static test without execute it on the simulator"
