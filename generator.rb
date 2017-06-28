@@ -172,19 +172,19 @@ class Generator
             e = rand @param.short_constr_exec_range
             begin
                d = rand @param.short_constr_dead_demo_mixed
-            end while d <= p
+            end while d >= p
          when "mid"
             p = rand @param.mid_period_demo_mixed
             e = rand @param.mid_constr_exec_range
             begin
                d = rand @param.mid_constr_dead_demo_mixed
-            end while d <= p
+            end while d >= p
          when "long"
             p = rand @param.long_period_demo_mixed
             e = rand @param.long_constr_exec_range
             begin
                d = rand @param.long_constr_dead_demo_mixed
-            end while d <= p
+            end while d >= p
          else
             raise 'Error size in generateSingleTask'
          end
@@ -287,7 +287,7 @@ class Generator
                    "autoruby/taskset/#{timeStampStr}") do |stdin, stdout, stderr, thread|
          thread.value
       end
-      Open3.popen3("cp ../data_struct01.ads ../ravenscar-edf/") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cp ../data_struct01.ads ../edf-ravenscar/") do |stdin, stdout, stderr, thread|
          thread.value
       end
       Open3.popen3("mv ../data_struct01.ads ../prio-ravenscar/") do |stdin, stdout, stderr, thread|
@@ -305,7 +305,7 @@ class Generator
                    "autoruby/taskset/#{timeStampStr}") do |stdin, stdout, stderr, thread|
          thread.value
       end
-      Open3.popen3("cp ../dfp_data_struct01.ads ../ravenscar-edf/") do |stdin, stdout, stderr, thread|
+      Open3.popen3("cp ../dfp_data_struct01.ads ../edf-ravenscar/") do |stdin, stdout, stderr, thread|
          thread.value
       end
       Open3.popen3("mv ../dfp_data_struct01.ads ../prio-ravenscar/") do |stdin, stdout, stderr, thread|
@@ -317,9 +317,9 @@ class Generator
       ### va modificato il file contenente i dati di definizione degli oggetti protetti ovvero
       ### dfp_test_procedure.ads
 
-      lines = File.readlines('../ravenscar-edf/dfp_test_procedure.ads')
+      lines = File.readlines('../edf-ravenscar/dfp_test_procedure.ads')
       lines[11] = "\t\tpragma Priority (#{minDead});" << $/
-      File.open('../ravenscar-edf/dfp_test_procedure.ads', 'w') { |f| f.write(lines.join) }
+      File.open('../edf-ravenscar/dfp_test_procedure.ads', 'w') { |f| f.write(lines.join) }
 
       lines = File.readlines('../prio-ravenscar/dfp_test_procedure.ads')
       lines[11] = "\t\tpragma Priority (#{maxPrio});" << $/

@@ -15,11 +15,11 @@ class Looper
    def looperForLocalTests loops, mode, type, flag
       i=1;
       if flag then
-         compiler = Compiler.new
-         puts "0) Cleaning Environment."
-         compiler.cleanAll
-         puts "0) Compiling Libraries."
-         compiler.compileLibs
+       compiler = Compiler.new
+       puts "0) Cleaning Environment."
+       compiler.cleanAll
+       puts "0) Compiling Libraries."
+       compiler.compileLibs
       end
       puts "\n"
       loops.times do
@@ -37,7 +37,7 @@ class Looper
             "with: #{maxLoadEDF} %."
             simulator = Simulator.new
             edf_execs, edf_deads, edf_preem, hash_edf_dead, hash_edf_map, hash_edf_exec =
-               simulator.execGlobalTestLocal "tsim-leon ../ravenscar-edf/unit01"
+               simulator.execGlobalTestLocal "tsim-leon ../edf-ravenscar/unit01"
             puts "#{i}/#{loops}) EDF Test Completed."
             puts "#{i}/#{loops}) Execs: #{edf_execs}\t Deads: #{edf_deads}\t Preemps: #{edf_preem}"
             puts "#{i}/#{loops}) Registering Data: FPS Feasibility: #{feasibilityFPS.to_s.upcase}."
@@ -75,7 +75,7 @@ class Looper
       compileUnit05
       puts "0) Units Compiled."
       edf_execs, edf_deads, edf_preem, hash_fps =
-         execGlobalTestLocal_withBlock "tsim-leon ../ravenscar-edf/unit05"
+         execGlobalTestLocal_withBlock "tsim-leon ../edf-ravenscar/unit05"
       puts "0) EDF Test Completed."
       puts "0) Execs: #{edf_execs}\t Deads: #{edf_deads}\t Preemps: #{edf_preem}"
       fps_execs, fps_deads, fps_preem, hash_fps =
@@ -124,7 +124,7 @@ class Looper
          puts "#{i}/#{loops}) Registering Data: EDF Feasibility: #{feasibilityEDF.to_s.upcase} "\
          "with: #{maxLoadEDF} %."
          edf_execs, edf_deads, edf_preem, hash_edf =
-            execGlobalTestLocal_withBlock "tsim-leon ../ravenscar-edf/unit05"
+            execGlobalTestLocal_withBlock "tsim-leon ../edf-ravenscar/unit05"
          puts "#{i}/#{loops}) EDF Test Completed."
          puts "#{i}/#{loops}) Execs: #{edf_execs}\t Deads: #{edf_deads}\t Preemps: #{edf_preem}"
          puts "#{i}/#{loops}) Registering Data: FPS Feasibility: #{feasibilityFPS.to_s.upcase}."

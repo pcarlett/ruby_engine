@@ -5,7 +5,7 @@ require 'open3'
 class Compiler
 
    def cleanAll
-      Open3.popen3("make clean -C ../ravenscar-edf") do |stdin, stdout, stderr, thread|
+      Open3.popen3("make clean -C ../edf-ravenscar") do |stdin, stdout, stderr, thread|
          thread.value
          puts "EDF Libraries Cleaning Complete."
       end
@@ -16,7 +16,7 @@ class Compiler
    end
 
    def compileLibs
-      Open3.popen3("make libs -C ../ravenscar-edf") do |stdin, stdout, stderr, thread|
+      Open3.popen3("make libs -C ../edf-ravenscar") do |stdin, stdout, stderr, thread|
          thread.value
          puts "EDF Libs Compilation Complete."
       end
@@ -27,7 +27,7 @@ class Compiler
    end
 
    def compileUnit unit
-      Open3.popen3("make " + unit + " -C ../ravenscar-edf") do |stdin, stdout, stderr, thread|
+      Open3.popen3("make " + unit + " -C ../edf-ravenscar") do |stdin, stdout, stderr, thread|
          thread.value
          puts "EDF Unit01 Compilation Complete."
       end

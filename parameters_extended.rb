@@ -62,16 +62,16 @@ class Parameters_Extended
       ###################
       ##    PERIODS    ##
       ###################
-      @short_period_demo_mixed = 300..450 # 274..310 #   6.350.400 -->  17.781.120
-      @mid_period_demo_mixed   = 590..730 # 321..345 #  24.696.000 -->  66.679.200
-      @long_period_demo_mixed  = 850..999 # 361..374 # 166.698.000 --> 800.150.400
+      @short_period_demo_mixed = 300..450  # 274..310 #   6.350.400 -->  17.781.120
+      @mid_period_demo_mixed   = 590..730  # 321..345 #  24.696.000 -->  66.679.200
+      @long_period_demo_mixed  = 850..1000 # 361..374 # 166.698.000 --> 800.150.400
 
       #####################
       ##    DEADLINES    ##
       #####################
-      @short_constr_dead_demo_mixed = 350..500  #   2.540.160 -->   8.232.000
-      @mid_constr_dead_demo_mixed   = 640..780  #  14.288.400 -->  33.339.600
-      @long_constr_dead_demo_mixed  = 900..1050 # 114.307.200 --> 333.396.000
+      @short_constr_dead_demo_mixed = 250..400 #   2.540.160 -->   8.232.000
+      @mid_constr_dead_demo_mixed   = 540..680 #  14.288.400 -->  33.339.600
+      @long_constr_dead_demo_mixed  = 800..950 # 114.307.200 --> 333.396.000
 
       #################
       ##    EXECS    ##
