@@ -14,20 +14,23 @@ class Simulator
       Open3.popen3 (str) do |stdin, stdout, stderr, thread|
          i = 0
          Thread.new do
-            stdout.each do |str|
-               t = (i / 200).to_i
-               print "\r#{t}% achieved..."
-               l = str.split(";")
-               # puts "#{l[0]} -- #{l[1]} -- #{l[2]} "
-               if l[0].include?"Setting" then
-                  hash_map[l[4].chomp] = l[1].chomp
-                  hash_dead[l[4].chomp] = 0
-                  hash_exec[l[4].chomp] = 0
-               end
-               if l[0].include?"EXECUTED" then execs += 1; hash_exec[l[2].chomp] += 1 end
-               if l[0].include?"PREEMPT" then preem += 1 end #; hash[l[1]] += 1 end
-               if l[0].include?"DEADLINE" then deads += 1; hash_dead[l[2].chomp] += 1 end
-               i += 1
+               stdout.each do |str|
+                  #if (Time.now - a) > 20 then
+                  #   Process.kill("KILL",thread.pid)
+                  #end
+                  t = (i / 200).to_i
+                  print "\r#{t}% achieved..."
+                  l = str.split(";")
+                  # puts "#{l[0]} -- #{l[1]} -- #{l[2]} "
+                  if l[0].include?"Setting" then
+                     hash_map[l[4].chomp] = l[1].chomp
+                     hash_dead[l[4].chomp] = 0
+                     hash_exec[l[4].chomp] = 0
+                  end
+                  if l[0].include?"EXECUTED" then execs += 1; hash_exec[l[2].chomp] += 1 end
+                  if l[0].include?"PREEMPT" then preem += 1 end #; hash[l[1]] += 1 end
+                  if l[0].include?"DEADLINE" then deads += 1; hash_dead[l[2].chomp] += 1 end
+                  i += 1
             end
          end
          stdin.puts "go"
@@ -53,6 +56,9 @@ class Simulator
          i = 0
          Thread.new do
             stdout.each do |str|
+               if (Time.now - a) > 2 then
+                  Process.kill("KILL",thread.pid)
+               end
                t = (i / 200).to_i
                print "\r#{t}% achieved..."
                l = str.split(";")
@@ -75,12 +81,6 @@ class Simulator
       b = Time.now
       puts "\nEDF Time: #{b-a}"
       return edf_execs, edf_deads, edf_preem, hash
-   end
-
-   def execEDFTestRemote
-   end
-
-   def execFPSTestRemote
    end
 
    def uploadExecsToRemote

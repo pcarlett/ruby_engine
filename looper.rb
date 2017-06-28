@@ -15,11 +15,11 @@ class Looper
    def looperForLocalTests loops, mode, type, flag
       i=1;
       if flag then
-         compiler = Compiler.new
-         puts "0) Cleaning Environment."
-         compiler.cleanAll
-         puts "0) Compiling Libraries."
-         compiler.compileLibs
+       compiler = Compiler.new
+       puts "0) Cleaning Environment."
+       compiler.cleanAll
+       puts "0) Compiling Libraries."
+       compiler.compileLibs
       end
       puts "\n"
       loops.times do

@@ -172,19 +172,19 @@ class Generator
             e = rand @param.short_constr_exec_range
             begin
                d = rand @param.short_constr_dead_demo_mixed
-            end while d <= p
+            end while d >= p
          when "mid"
             p = rand @param.mid_period_demo_mixed
             e = rand @param.mid_constr_exec_range
             begin
                d = rand @param.mid_constr_dead_demo_mixed
-            end while d <= p
+            end while d >= p
          when "long"
             p = rand @param.long_period_demo_mixed
             e = rand @param.long_constr_exec_range
             begin
                d = rand @param.long_constr_dead_demo_mixed
-            end while d <= p
+            end while d >= p
          else
             raise 'Error size in generateSingleTask'
          end
