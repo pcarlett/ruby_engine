@@ -102,11 +102,12 @@ class Generator
          raise 'Error size in generateDataset'
       end
       rta_calculus = RTA_Calculus.new @taskset
-      feasibilityEDF, maxLoadEDF = rta_calculus.computeRTAforEDF
-      feasibilityFPS = rta_calculus.computeRTAforFPS
+      feasibilityEDF, maxLoadEDF, iterEDF = rta_calculus.computeRTAforEDF
+      feasibilityFPS, iterFPS = rta_calculus.computeRTAforFPS
       printDataFile
       totalTasks = num_of_short + num_of_mid + num_of_long
-      return timeStamp, totalTasks, num_of_short, num_of_mid, num_of_long, feasibilityEDF, maxLoadEDF, feasibilityFPS
+      return timeStamp, totalTasks, num_of_short, num_of_mid, num_of_long,
+               feasibilityEDF, maxLoadEDF, iterEDF, feasibilityFPS, iterFPS
    end
 
    def taskTypeNum type

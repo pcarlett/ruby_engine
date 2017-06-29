@@ -148,7 +148,7 @@ class RTA_Calculus
       # @taskset.each do |t|
       #    puts "Prio: #{t.prio}\t Dead: #{t.dead}\t Period: #{t.period}\t Exec: #{t.exec}"
       # end
-      i=1
+      i, x = 1, 1
       @taskset.each do |t|
          n = 0
          w = t.exec + t.FPS_CS1
@@ -156,6 +156,7 @@ class RTA_Calculus
             parts = 0
             @taskset.each do |tt|
                break if tt == t
+               x += 1
                parts += (w / tt.period.to_f).ceil *
                      (tt.exec + tt.FPS_CS1 + tt.FPS_CS2)
                   #   (tt.exec + tt.FPS_CS)
@@ -164,18 +165,18 @@ class RTA_Calculus
             # puts w_next
             if w_next == w then
                if w_next > t.period then
-                  return false
+                  return false, x
                end
                break if true
             end
             if w_next > t.period then
-               return false
+               return false, x
             end
             w = w_next
             n += 1
          end
       end
-      return true
+      return true, x
    end
 
    def computeRTAforEDF
@@ -184,6 +185,7 @@ class RTA_Calculus
       # a crash.
       # We work with Implicit deadlines actually, so our
 
+      x = 1
       maxLoad = 0.0
       # hyperPeriod = (@taskset.max_by &:period).period
       periodicArray = @taskset.map(&:period)
@@ -203,6 +205,7 @@ class RTA_Calculus
             if t == 0 then t = 1 end
             maxH = 0.to_f
             @taskset.each do |task|
+               x += 1
                # comp = task.EDF_CS + task.exec # used in original computation
                comp = task.EDF_CS1 + task.exec + task.EDF_CS2 # used in original computation
                # comp = task.exec # used for test in forcedTasksets
@@ -211,10 +214,10 @@ class RTA_Calculus
             end
             maxLoad = [maxLoad, (maxH / t)].max
             # print t.to_s + ": " + maxLoad.to_s + "\r"
-            if maxLoad > 1 then return false, maxLoad end
+            if maxLoad > 1 then return false, maxLoad, x end
          end
       end
-      return true, maxLoad
+      return true, maxLoad, x
    end
 
    def Extact_MaxPrio_MinDead

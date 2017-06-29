@@ -25,7 +25,7 @@ class Looper
       loops.times do
          generator = Generator.new
          timeStamp, totalTasks, short, mid, long, feasibilityEDF,
-         maxLoadEDF, feasibilityFPS = generator.generateDataset mode, type
+         maxLoadEDF, iterEDF, feasibilityFPS, iterFPS = generator.generateDataset mode, type
          puts "#{i}/#{loops}) Dataset Generated. Total: #{totalTasks}."
          puts "Shorts: #{short}\t Mids: #{mid}\t Long: #{long}"
          generator.datasetReplacement timeStamp
@@ -47,9 +47,9 @@ class Looper
             puts "#{i}/#{loops}) Execs: #{fps_execs}\t Deads: #{fps_deads}\t Preemps: #{fps_preem}"
             recorder = Recorder.new
             recorder.dataRegistration timeStamp, mode, totalTasks, short, mid, long,
-               feasibilityEDF, maxLoadEDF, feasibilityFPS, edf_execs, edf_deads,
-               edf_preem, fps_execs, fps_deads, fps_preem, hash_edf_dead, hash_edf_map,
-               hash_edf_exec, hash_fps_dead, hash_fps_map, hash_fps_exec
+               feasibilityEDF, maxLoadEDF, iterEDF, feasibilityFPS, iterFPS, edf_execs,
+               edf_deads, edf_preem, fps_execs, fps_deads, fps_preem, hash_edf_dead,
+               hash_edf_map, hash_edf_exec, hash_fps_dead, hash_fps_map, hash_fps_exec
             puts "#{i}/#{loops}) Data Registered Correctly."
          else
             puts "#{i}/#{loops}) Testing EDF Dataset: EDF Feasibility: "\

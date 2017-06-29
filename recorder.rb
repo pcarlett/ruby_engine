@@ -20,18 +20,18 @@ class Recorder
    end
 
    def dataRegistration (timeStamp, mode, totalTasks, short, mid, long,
-                     feasibilityEDF, maxLoadEDF, feasibilityFPS, edf_execs, edf_deads,
-                     edf_preem, fps_execs, fps_deads, fps_preem, hash_edf_dead,
-                     hash_edf_map, hash_edf_exec, hash_fps_dead, hash_fps_map,
-                     hash_fps_exec)
+                     feasibilityEDF, maxLoadEDF, iterEDF, feasibilityFPS, iterFPS,
+                     edf_execs, edf_deads, edf_preem, fps_execs, fps_deads,
+                     fps_preem, hash_edf_dead, hash_edf_map, hash_edf_exec,
+                     hash_fps_dead, hash_fps_map, hash_fps_exec)
 
       timeStampStr = timeStamp.strftime("%Y-%m-%d %H:%M:%S.%6L")
       timeStampStr.gsub! " ", "_"
       File.open("../../workspace/results.csv", 'a') do |out|
          out.puts "#{timeStampStr};#{mode};#{totalTasks};#{short};#{mid};"\
-                   "#{long};#{feasibilityEDF};#{maxLoadEDF};#{feasibilityFPS};"\
-                   "#{edf_execs};#{edf_deads};#{edf_preem};#{fps_execs};"\
-                   "#{fps_deads};#{fps_preem}"
+                   "#{long};#{feasibilityEDF};#{maxLoadEDF};#{iterEDF};"\
+                   "#{feasibilityFPS};#{iterFPS};#{edf_execs};#{edf_deads};"\
+                   "#{edf_preem};#{fps_execs};#{fps_deads};#{fps_preem}"
       end
 
       edf_temp = hash_edf_map.merge(hash_edf_dead){|key, old, new| Array(old).push(new) }
