@@ -69,9 +69,9 @@ class Parameters_Extended
       #####################
       ##    DEADLINES    ##
       #####################
-      @short_constr_dead_demo_mixed = 250..400 #   2.540.160 -->   8.232.000
-      @mid_constr_dead_demo_mixed   = 540..680 #  14.288.400 -->  33.339.600
-      @long_constr_dead_demo_mixed  = 800..950 # 114.307.200 --> 333.396.000
+      @short_constr_dead_demo_mixed = 240..390 #   2.540.160 -->   8.232.000
+      @mid_constr_dead_demo_mixed   = 530..670 #  14.288.400 -->  33.339.600
+      @long_constr_dead_demo_mixed  = 790..940 # 114.307.200 --> 333.396.000
 
       #################
       ##    EXECS    ##
@@ -83,28 +83,28 @@ class Parameters_Extended
       @mid_impl_exec_range     =   60000..180000  #  100000..250000
       @long_impl_exec_range    =  360000..1180000 # 1000000..2500000
 
-      @short_constr_exec_range =   10000..25000   #   10000..25000
-      @mid_constr_exec_range   =   50000..150000  #  100000..250000
-      @long_constr_exec_range  =  300000..750000  # 1000000..2500000
+      @short_constr_exec_range =   10000..25000    #   10000..25000
+      @mid_constr_exec_range   =  100000..250000   #  100000..250000
+      @long_constr_exec_range  = 1000000..2500000  # 1000000..2500000
 
       #########################################
       ##    TASK NUMS   (183 Tasks Limit)    ##
       #########################################
 
       ## 1) Short, Mid & Long to Reach 100%
-      @short_num_task_range_1    = 25..60 # bell 50 tasks low 25 high 75
-      @mid_num_task_range_1      = 25..60 #
-      @long_num_task_range_1     = 25..60 #
+      @short_num_task_range_1    = 20..50    # bell 50 tasks low 25 high 75
+      @mid_num_task_range_1      = 20..50    #
+      @long_num_task_range_1     = 20..50    #
 
       ## 2) Short & Long for Performance  near 100 %
-      @short_num_task_range_2    = 30..65 # bell 100 tasks low 30 high 65
-      @mid_num_task_range_2      = 0..0   #
-      @long_num_task_range_2     = 30..65 #
+      @short_num_task_range_2    = 30..65    # bell 100 tasks low 30 high 65
+      @mid_num_task_range_2      = 0..0      #
+      @long_num_task_range_2     = 30..65    #
 
       ## 3) Long Task only for Performance near 100 %
-      @short_num_task_range_3    = 0..0     # bell 350 tasks low 200 high 500
-      @mid_num_task_range_3      = 0..0     #
-      @long_num_task_range_3     = 100..250 #
+      @short_num_task_range_3    = 0..0      # bell 350 tasks low 200 high 500
+      @mid_num_task_range_3      = 0..0      #
+      @long_num_task_range_3     = 100..250  #
 
       ## 4) Short and Mid only for Performance near 100 %
       @short_num_task_range_4    = 25..75    # bell 350 tasks low 200 high 500
@@ -117,14 +117,14 @@ class Parameters_Extended
       @long_num_task_range_5     = 0..0      #
 
       ## 6) Mid and Long high density tasks for Performance near 100 %
-      @short_num_task_range_6    = 10..15         # bell 350 tasks low 200 high 500
-      @mid_num_task_range_6      = 70..120      #
-      @long_num_task_range_6     = 70..90      #
+      @short_num_task_range_6    = 10..15    # bell 350 tasks low 200 high 500
+      @mid_num_task_range_6      = 70..120   #
+      @long_num_task_range_6     = 70..90    #
 
       ## 7) Mid only high density tasks for Performance near 100 %
-      @short_num_task_range_7    = 0..0         # bell 350 tasks low 200 high 500
-      @mid_num_task_range_7      = 120..170     #
-      @long_num_task_range_7     = 0..0         #
+      @short_num_task_range_7    = 0..0      # bell 350 tasks low 200 high 500
+      @mid_num_task_range_7      = 120..170  #
+      @long_num_task_range_7     = 0..0      #
 
       @taskset = Array.new
 
